@@ -17,8 +17,8 @@ import ProjectsContributions from 'sub-components/profile/ProjectsContributions'
 import RecentFromBlog from 'sub-components/profile/RecentFromBlog';
 
 // sub components for /pages/billing
-import CurrentPlan from 'sub-components/billing/CurrentPlan';
 import BillingAddress from 'sub-components/billing/BillingAddress';
+import CurrentPlan from 'sub-components/billing/CurrentPlan';
 
 // sub components for /pages/settings
 import DeleteAccount from 'sub-components/settings/DeleteAccount';
@@ -26,26 +26,17 @@ import EmailSetting from 'sub-components/settings/EmailSetting';
 import GeneralSetting from 'sub-components/settings/GeneralSetting';
 import Notifications from 'sub-components/settings/Notifications';
 import Preferences from 'sub-components/settings/Preferences';
+import AddStudent from 'sub-components/students/addStudent';
 
 
 export {
-   ActiveProjects,
-   TasksPerformance,
-   Teams,
-   
-   AboutMe,
-   ActivityFeed,
-   MyTeam,
-   ProfileHeader,
+
+   AboutMe, ActiveProjects, ActivityFeed, AddStudent, BillingAddress, CurrentPlan, DeleteAccount,
+   EmailSetting,
+   GeneralSetting, MyTeam, Notifications,
+   Preferences, ProfileHeader,
    ProjectsContributions,
-   RecentFromBlog,
-
-   CurrentPlan,
-   BillingAddress,
-
-   DeleteAccount, 
-   EmailSetting,  
-   GeneralSetting, 
-   Notifications, 
-   Preferences
+   RecentFromBlog, TasksPerformance,
+   Teams
 };
+

@@ -35,6 +35,18 @@ export const DashboardMenu = [
 		title: 'LAYOUTS & PAGES',
 		grouptitle: true
 	},
+
+
+	{
+		id: uuid(),
+		title: 'Students',
+		icon: 'layers',
+		children: [
+			{ id: uuid(), link: '/pages/add_student', name: 'Add Student' },
+			{ id: uuid(), link: '/pages/settings', name: 'List Student'},
+			]
+	},
+
 	{
 		id: uuid(),
 		title: 'Pages',
