@@ -42,7 +42,7 @@ export const DashboardMenu = [
 		title: 'Students',
 		icon: 'layers',
 		children: [
-			{ id: uuid(), link: '/pages/add_student', name: 'Add Student' },
+			{ id: uuid(), link: '/pages/addStudent', name: 'Add Student' },
 			{ id: uuid(), link: '/pages/settings', name: 'List Student'},
 			]
 	},

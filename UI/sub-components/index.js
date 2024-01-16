@@ -26,7 +26,7 @@ import EmailSetting from 'sub-components/settings/EmailSetting';
 import GeneralSetting from 'sub-components/settings/GeneralSetting';
 import Notifications from 'sub-components/settings/Notifications';
 import Preferences from 'sub-components/settings/Preferences';
-import AddStudent from 'sub-components/students/addStudent';
+import AddStudent from 'sub-components/students/AddStudent';
 
 
 export {
