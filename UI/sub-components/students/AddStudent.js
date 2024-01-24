@@ -1,4 +1,5 @@
 // import node module libraries
+import { ErrorMessage, Formik } from 'formik';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 
 const AddStudent = () => {
@@ -34,74 +35,115 @@ const AddStudent = () => {
           {/* card body */}
           <Card.Body className='mt-5'>
 
-            <Form>
-              {/* New email */}
-              <Row className="mb-3">
-                <Form.Label className="col-sm-4" htmlFor="newEmailAddress">First Name</Form.Label>
-                <Col md={8} xs={12}>
-                  <Form.Control type="text" placeholder="Enter your first name" id="firstName" required />
-                </Col>
-
-              </Row>
-            </Form>
-
-            <Form>
+            <Formik
 
 
-              <Row className="mb-3">
-                <Form.Label className="col-sm-4" htmlFor="lastName">Last Name</Form.Label>
-                <Col md={8} xs={12}>
-                  <Form.Control type="text" placeholder="Enter your last name" id="lastName" required />
-                </Col>
-              </Row>
+              initialValues={{ firstName: '' }}
+              validate={values => {
+                const errors = {}
+                if (!values.firstName) {
+                  errors.firstName = 'Required'
+                }
 
-              {/* New password */}
-              <Row className="mb-3">
-                <Form.Label className="col-sm-4" htmlFor="fatherName">Father Name</Form.Label>
-                <Col md={8} xs={12}>
-                  <Form.Control type="text" placeholder="Enter your father name" id="fatherName" required />
-                </Col>
-              </Row>
+                return errors
+              }}
+              onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                  alert(JSON.stringify(values, null, 2))
+                  setSubmitting(false)
+                }, 400)
+              }}
 
-              <Row className="mb-3">
-                <Form.Label className="col-sm-4" htmlFor="fatherName">Mother Name</Form.Label>
-                <Col md={8} xs={12}>
-                  <Form.Control type="text" placeholder="Enter your Mother name" id="motherName" required />
-                </Col>
-              </Row>
+            >
 
 
-              <Row className="mb-3">
-                <Form.Label className="col-sm-4" htmlFor="fatherName">Class</Form.Label>
-                <Col md={8} xs={12}>
-                  <Form.Select aria-label="Default select example">
-
-                    <option value="">Please select</option>
-                    {
-                      classList.map(i => (
-                        <option value={i}>{ordinal_suffix_of(i)}</option>
-                      )
-                      )
-
-                    }
-
-                  </Form.Select>
-                </Col>
-                <Col md={{ offset: 4, span: 8 }} xs={12} className="mt-4">
-                  <Button variant="primary" type="submit">
-                    Save Changes
-                  </Button>
-                </Col>
-              </Row>
+              {
+                (
+                  { values,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit, isSubmitting }) => (
 
 
 
-            </Form>
+                  < Form onSubmit={handleSubmit}>
+
+                    {JSON.stringify(errors)}
+                    {/* New email */}
+                    <Row className="mb-3">
+                      <Form.Label className="col-sm-4" htmlFor="newEmailAddress">First Name</Form.Label>
+                      <Col md={8} xs={12}>
+                        <Form.Control
+                          value={values.firstName}
+                          type="text"
+                          name='firstName'
+                          placeholder="Enter your first name" id="firstName" />
+
+                        <ErrorMessage name="firstName" component="div" />
+                      </Col>
+
+                    </Row>
+
+
+                    <Row className="mb-3">
+                      <Form.Label className="col-sm-4" htmlFor="lastName">Last Name</Form.Label>
+                      <Col md={8} xs={12}>
+                        <Form.Control type="text" placeholder="Enter your last name" id="lastName" />
+                      </Col>
+                    </Row>
+
+                    {/* New password */}
+                    <Row className="mb-3">
+                      <Form.Label className="col-sm-4" htmlFor="fatherName">Father Name</Form.Label>
+                      <Col md={8} xs={12}>
+                        <Form.Control type="text" placeholder="Enter your father name" id="fatherName" />
+                      </Col>
+                    </Row>
+
+                    <Row className="mb-3">
+                      <Form.Label className="col-sm-4" htmlFor="fatherName">Mother Name</Form.Label>
+                      <Col md={8} xs={12}>
+                        <Form.Control type="text" placeholder="Enter your Mother name" id="motherName" />
+                      </Col>
+                    </Row>
+
+
+                    <Row className="mb-3">
+                      <Form.Label className="col-sm-4" htmlFor="fatherName">Class</Form.Label>
+                      <Col md={8} xs={12}>
+                        <Form.Select aria-label="Default select example">
+
+                          <option value="">Please select</option>
+                          {
+                            classList.map(i => (
+                              <option value={i}>{ordinal_suffix_of(i)}</option>
+                            )
+                            )
+
+                          }
+
+                        </Form.Select>
+                      </Col>
+                      <Col md={{ offset: 4, span: 8 }} xs={12} className="mt-4">
+                        <Button variant="primary" type="submit" disabled={isSubmitting}>
+                          Save Changes
+                        </Button>
+                      </Col>
+                    </Row>
+
+                  </Form>
+
+                )}
+
+            </Formik>
+
 
           </Card.Body>
         </Card>
       </Col>
-    </Row>
+    </Row >
   )
 }
 

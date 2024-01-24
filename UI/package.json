@@ -11,8 +11,10 @@
   "dependencies": {
     "@vercel/analytics": "^1.0.0",
     "apexcharts": "^3.37.3",
+    "bootstrap": "~5.2.0",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
+    "formik": "^2.4.5",
     "next": "13.2.4",
     "next-seo": "^5.15.0",
     "node-sass": "^7.0.3",
@@ -30,7 +32,6 @@
     "sass-loader": "^13.2.2",
     "simplebar": "^6.2.4",
     "simplebar-react": "^3.2.3",
-    "uuid": "^9.0.0",
-    "bootstrap": "~5.2.0"
+    "uuid": "^9.0.0"
   }
 }
