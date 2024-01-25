@@ -2,9 +2,29 @@
 import { ErrorMessage, Formik } from 'formik';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 
+import { AddStudentSchema } from "./../../validation";
+
+
+
+
+const initialValues = {
+  firstName: "",
+  lastName: "",
+  fatherName: "",
+  motherName: "",
+  class: "",
+
+};
+
+
+
 const AddStudent = () => {
 
   const classList = [1, 2, 3, 4, 5, 6, 7, 8]
+
+
+
+
 
   function ordinal_suffix_of(i) {
     let j = i % 10,
@@ -26,6 +46,9 @@ const AddStudent = () => {
 
 
 
+
+
+
   return (
     <Row className="mb-8 justify-content-center">
 
@@ -38,15 +61,8 @@ const AddStudent = () => {
             <Formik
 
 
-              initialValues={{ firstName: '' }}
-              validate={values => {
-                const errors = {}
-                if (!values.firstName) {
-                  errors.firstName = 'Required'
-                }
-
-                return errors
-              }}
+              initialValues={initialValues}
+              validationSchema={AddStudentSchema}
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
                   alert(JSON.stringify(values, null, 2))
@@ -79,6 +95,7 @@ const AddStudent = () => {
                           value={values.firstName}
                           type="text"
                           name='firstName'
+                          onChange={handleChange}
                           placeholder="Enter your first name" id="firstName" />
 
                         <ErrorMessage name="firstName" component="div" />
@@ -90,22 +107,45 @@ const AddStudent = () => {
                     <Row className="mb-3">
                       <Form.Label className="col-sm-4" htmlFor="lastName">Last Name</Form.Label>
                       <Col md={8} xs={12}>
-                        <Form.Control type="text" placeholder="Enter your last name" id="lastName" />
+                        <Form.Control
+                          onChange={handleChange}
+                          value={values.lastName}
+                          name='lastName'
+                          type="text"
+                          placeholder="Enter your last name"
+                          id="lastName"
+                        />
+                        <ErrorMessage name="lastName" component="div" />
                       </Col>
                     </Row>
 
-                    {/* New password */}
+
                     <Row className="mb-3">
                       <Form.Label className="col-sm-4" htmlFor="fatherName">Father Name</Form.Label>
                       <Col md={8} xs={12}>
-                        <Form.Control type="text" placeholder="Enter your father name" id="fatherName" />
+                        <Form.Control
+
+                          onChange={handleChange}
+                          value={values.fatherName}
+
+                          type="text" name='fatherName' placeholder="Enter your father name" id="fatherName" />
+                        <ErrorMessage className='validation-error-message' name="fatherName" component="div" />
                       </Col>
                     </Row>
 
                     <Row className="mb-3">
                       <Form.Label className="col-sm-4" htmlFor="fatherName">Mother Name</Form.Label>
                       <Col md={8} xs={12}>
-                        <Form.Control type="text" placeholder="Enter your Mother name" id="motherName" />
+                        <Form.Control
+                          name='motherName'
+                          onChange={handleChange}
+                          value={values.motherName}
+                          type="text"
+                          placeholder="Enter your Mother name" id="motherName" />
+
+                        <ErrorMessage name="motherName" component="div">
+
+                        </ErrorMessage>
                       </Col>
                     </Row>
 
@@ -113,7 +153,11 @@ const AddStudent = () => {
                     <Row className="mb-3">
                       <Form.Label className="col-sm-4" htmlFor="fatherName">Class</Form.Label>
                       <Col md={8} xs={12}>
-                        <Form.Select aria-label="Default select example">
+                        <Form.Select
+                          name='class'
+                          onChange={handleChange}
+                          value={values.class}
+                          aria-label="Default select example">
 
                           <option value="">Please select</option>
                           {
@@ -125,6 +169,7 @@ const AddStudent = () => {
                           }
 
                         </Form.Select>
+                        <ErrorMessage name="class" component="div" />
                       </Col>
                       <Col md={{ offset: 4, span: 8 }} xs={12} className="mt-4">
                         <Button variant="primary" type="submit" disabled={isSubmitting}>
