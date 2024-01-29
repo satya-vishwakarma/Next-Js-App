@@ -27,13 +27,14 @@ import GeneralSetting from 'sub-components/settings/GeneralSetting';
 import Notifications from 'sub-components/settings/Notifications';
 import Preferences from 'sub-components/settings/Preferences';
 import AddStudent from 'sub-components/students/AddStudent';
+import ListStudent from 'sub-components/students/ListStudent';
 
 
 export {
 
    AboutMe, ActiveProjects, ActivityFeed, AddStudent, BillingAddress, CurrentPlan, DeleteAccount,
    EmailSetting,
-   GeneralSetting, MyTeam, Notifications,
+   GeneralSetting, ListStudent, MyTeam, Notifications,
    Preferences, ProfileHeader,
    ProjectsContributions,
    RecentFromBlog, TasksPerformance,
