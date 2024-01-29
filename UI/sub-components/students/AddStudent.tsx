@@ -3,9 +3,11 @@ import { ErrorMessage, Formik } from 'formik';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { increment } from '../../lib/redux/features/student';
+import { addStudent as addStudentRed } from '../../lib/redux/features/student';
 import { RootState } from '../../lib/redux/store';
 import { AddStudentSchema } from '../../validation';
+
+import toast, { Toaster } from 'react-hot-toast';
 
 const initialValues = {
   firstName: '',
@@ -17,7 +19,7 @@ const initialValues = {
 
 const AddStudent = () => {
   const count = JSON.stringify(
-    useSelector((state: RootState) => state.counter.studenList),
+    useSelector((state: RootState) => state.student.studenList),
   );
   const dispatch = useDispatch();
 
@@ -45,14 +47,16 @@ const AddStudent = () => {
         <Card id="edit">
           {/* card body */}
           <Card.Body className="mt-5">
+            <Toaster position="top-right" reverseOrder={false} />
             <Formik
               initialValues={initialValues}
               validationSchema={AddStudentSchema}
-              onSubmit={(values: any, { setSubmitting }) => {
+              onSubmit={(values: any, { setSubmitting, resetForm }) => {
                 setTimeout(() => {
-                  dispatch(increment(values));
-                  alert(JSON.stringify(values, null, 2));
+                  dispatch(addStudentRed(values));
+                  toast.success('Student save successfully.');
                   setSubmitting(false);
+                  resetForm();
                 }, 400);
               }}
             >
@@ -157,7 +161,7 @@ const AddStudent = () => {
                       >
                         <option value="">Please select</option>
                         {classList.map((i) => (
-                          <option value={i}>{ordinal_suffix_of(i)}</option>
+                          <option key={i} value={i}>{ordinal_suffix_of(i)}</option>
                         ))}
                       </Form.Select>
                       <ErrorMessage name="class" component="div" />

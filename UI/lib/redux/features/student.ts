@@ -1,42 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface student {
-  name: string,
-  fatherName: string
+export interface student {
+  firstName: string;
+  lastName: string;
+  fatherName: string;
+  motherName: string;
+  class: string;
 }
 
-
-export interface CounterState {
+export interface StudentState {
   studenList: student[];
 }
 
-const initialState: CounterState = {
-  studenList: [{
-    name: "",
-    fatherName: ""
-  }],
+const initialState: StudentState = {
+  studenList: [],
 };
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const studentSlice = createSlice({
+  name: 'student',
   initialState,
   reducers: {
-    increment: (statstate, action: any) => {
+    addStudent: (statstate, action: any) => {
       statstate.studenList.push(action.payload);
     },
     listStudent: (state) => {
       state;
     },
-    // decrement: (state) => {
-    //   state.value -= 1
-    // },
-    // incrementByAmount: (state, action: PayloadAction<number>) => {
-    //   state.value += action.payload
-    // },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, listStudent } = counterSlice.actions;
+export const { addStudent, listStudent } = studentSlice.actions;
 
-export default counterSlice.reducer;
+export default studentSlice.reducer;

@@ -1,39 +1,35 @@
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { student } from '../../lib/redux/features/student';
 import { RootState } from '../../lib/redux/store';
 
 const StudentList = () => {
   const ListStudent = useSelector(
-    (state: RootState) => state.counter.studenList,
+    (state: RootState) => state.student.studenList,
   );
-
-
-
-
-
 
   return (
     <Table responsive className="text-nowrap">
       <thead>
         <tr>
-          {ListStudent.length > 0 && Object.keys(ListStudent[0]).map((i: any) => (
-            <th scope="col">{i} </th>
-          ))}
+          <th scope="col"> Sr.No </th>
+          <th scope="col"> FirstName </th>
+          <th scope="col"> LastName </th>
+          <th scope="col"> FatherName </th>
+          <th scope="col"> MotherName </th>
+          <th scope="col"> Class </th>
+          <th scope="col"> Action </th>
         </tr>
       </thead>
       <tbody>
-        {ListStudent.map((i: any) => (
-          <tr>
-            <th scope="row"> </th>
+        {ListStudent.map((i: student, index) => (
+          <tr key={index}>
+            <th scope="row"> {index + 1} </th>
             <td>{i.firstName}</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
+            <td>{i.lastName}</td>
+            <td>{i.fatherName}</td>
+            <td>{i.motherName}</td>
+            <td>{i.class}</td>
           </tr>
         ))}
       </tbody>
