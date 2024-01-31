@@ -1,4 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { MongoExceptionFilter } from '@app/comman/filters/mongo-exception.filter';
+import { Body, Controller, Get, Post, Req, UseFilters } from '@nestjs/common';
+
+import { userRequest } from '@app/comman/interfaces';
+import { UserDto } from './dto/users.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -8,5 +12,16 @@ export class UsersController {
   @Get()
   getUsers() {
     return this.usersService.getAllUser();
+  }
+
+  @UseFilters(MongoExceptionFilter)
+  @Post('register')
+  registerUser(@Body() body: UserDto) {
+    return this.usersService.registerUser(body);
+  }
+
+  @Get('profile')
+  getUserInfo(@Req() req: userRequest) {
+    return req.user;
   }
 }
