@@ -3,6 +3,11 @@ next-js-app/node_modules*
 UI/node_modules*
 
 next-js-app/.env
+next-js-app/*.env
+next-js-app/*.env.example
+*.env.local
+*.env.staging
 
 
 
+nestjs-api/.env
