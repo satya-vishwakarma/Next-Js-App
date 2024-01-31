@@ -8,7 +8,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-import { ERRORMESSAGE } from '@app/comman/constants';
+import { ERRORMESSAGE } from '@app/common/constants';
 import { ApiProperty } from '@nestjs/swagger';
 
 const { PASSOWRDVALIDATION } = ERRORMESSAGE;

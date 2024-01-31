@@ -1,7 +1,7 @@
-import { MongoExceptionFilter } from '@app/comman/filters/mongo-exception.filter';
+import { MongoExceptionFilter } from '@app/common/filters/mongo-exception.filter';
 import { Body, Controller, Get, Post, Req, UseFilters } from '@nestjs/common';
 
-import { userRequest } from '@app/comman/interfaces';
+import { userRequest } from '@app/common/interfaces';
 import { UserDto } from './dto/users.dto';
 import { UsersService } from './users.service';
 
