@@ -1,11 +1,11 @@
+import { AppController } from '@app/app.controller';
+import { AppService } from '@app/app.service';
 import { config } from '@configs';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 
+import { UsersModule } from '@app/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersModule } from './users/users.module';
 
 
 @Module({
