@@ -11,7 +11,7 @@ import 'styles/theme.scss';
 // import default layouts
 import DefaultDashboardLayout from 'layouts/DefaultDashboardLayout';
 import { Provider } from 'react-redux';
-import { store } from './../lib/redux/store';
+import { store } from './../redux/store';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
