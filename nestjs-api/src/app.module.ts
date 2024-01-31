@@ -7,16 +7,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from '@app/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
-
 @Module({
   imports: [
-    ConfigModule.forRoot(
-      {
-        isGlobal: true,
-        load: [config],
-        cache: true
-      }
-    ),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [config],
+      cache: true,
+    }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
@@ -24,12 +21,13 @@ import { MongooseModule } from '@nestjs/mongoose';
           uri: `${configService.get<string>(
             'mongodb.database.connectionString',
           )}/${configService.get<string>('mongodb.database.databaseName')}`,
-        }
+        };
       },
       inject: [ConfigService],
     }),
-    UsersModule],
+    UsersModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
