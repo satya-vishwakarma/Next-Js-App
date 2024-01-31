@@ -6,7 +6,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
+    "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
@@ -16,6 +16,48 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@app/*": [
+        "./src/*"
+      ],
+      "@core-api/constants": [
+        "./constants/index"
+      ],
+      "@configs": [
+        "configs/index"
+      ],
+      "@core-api/common": [
+        "./src/common/*"
+      ],
+      "@core-api/schemas": [
+        "./src/common/schemas/index"
+      ],
+      "@core-api/validators": [
+        "./src/common/validators/index"
+      ],
+      "@core-api/interceptors": [
+        "./src/interceptors/*"
+      ],
+      "@core-api/server": [
+        "./src/server/index"
+      ],
+      "@core-api/utils": [
+        "./src/utils/index"
+      ],
+      "@core-api/appConfig": [
+        "configs/config"
+      ],
+      "@core-api/types": [
+        "./src/types/index"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "constants/*.ts"
+  ]
 }
