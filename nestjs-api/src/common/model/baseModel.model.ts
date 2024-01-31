@@ -1,24 +1,24 @@
-import { BaseModelInterface } from '../interfaces/baseModel.interface'
+import { BaseModelInterface } from '../interfaces/baseModel.interface';
 
 export abstract class BaseModel implements BaseModelInterface {
-  private readonly currentModel: any
+  private readonly currentModel: any;
   constructor(modelRef: any) {
-    this.currentModel = modelRef
+    this.currentModel = modelRef;
   }
   find(where: object, projection: object = {}) {
-    return this.currentModel.find(where, projection)
+    return this.currentModel.find(where, projection);
   }
 
   findById(id: string) {
-    return this.currentModel.findById(id)
+    return this.currentModel.findById(id);
   }
 
   save(data: object) {
-    const response = new this.currentModel(data)
-    return response.save()
+    const response = new this.currentModel(data);
+    return response.save();
   }
 
   findOne(condition: object) {
-    return this.currentModel.findOne(condition)
+    return this.currentModel.findOne(condition);
   }
 }

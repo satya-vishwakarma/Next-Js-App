@@ -1,1 +1,1 @@
-export const GLOBLE = {}
+export const GLOBLE = {};

@@ -1,3 +1,3 @@
 export const removeMongoDbFeilds = () => {
-  return 'Abc'
-}
+  return 'Abc';
+};

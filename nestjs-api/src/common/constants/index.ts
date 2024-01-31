@@ -1,3 +1,3 @@
-export { ERRORMESSAGE } from './error'
+export { ERRORMESSAGE } from './error';
 
-export { GLOBLE } from './constants'
+export { GLOBLE } from './constants';
