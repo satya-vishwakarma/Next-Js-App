@@ -1,0 +1,6 @@
+next-js-app/.next/*
+next-js-app/node_modules*
+UI/node_modules*
+
+
+
