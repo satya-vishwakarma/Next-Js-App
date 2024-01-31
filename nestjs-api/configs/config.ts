@@ -13,4 +13,5 @@ export const config = (): ConfigProps => ({
       databaseName: process.env.DATABASENAME || 'local',
     },
   },
+  enableDebugMessage: true,
 });

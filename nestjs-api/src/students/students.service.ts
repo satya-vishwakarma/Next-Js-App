@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { StudentDto } from './dto/student.dto';
 import { StudentModel } from './model/student.model';
 
 @Injectable()
 export class StudentsService {
   constructor(private readonly studentModel: StudentModel) {}
-  createStudent() {
-    return this.studentModel.save({ firstName: 'sam' });
+  createStudent(body: StudentDto) {
+    return this.studentModel.save(body);
   }
 }

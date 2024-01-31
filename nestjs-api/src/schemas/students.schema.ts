@@ -7,19 +7,19 @@ import { Schema as MongooseSchema } from 'mongoose';
 
 @Schema({ collection: 'students' })
 export class Students {
-  @Prop({ required: false, type: String })
+  @Prop({ required: true, type: String })
   firstName: string;
 
-  @Prop({ required: false, type: String })
+  @Prop({ required: true, type: String })
   lastName: string;
 
-  @Prop({ required: false, type: String })
+  @Prop({ required: true, type: String })
   fatherName: string;
 
-  @Prop({ required: false, type: String })
+  @Prop({ required: true, type: String })
   motherName: string;
 
-  @Prop({ required: false, type: String })
+  @Prop({ required: true, type: String })
   class: string;
 
   @Prop({ required: true, default: Status.INACTIVE })

@@ -1,8 +1,8 @@
 import { BaseModelInterface } from '../interfaces/baseModel.interface';
 
 export abstract class BaseModel implements BaseModelInterface {
-  private readonly currentModel: any;
-  constructor(modelRef: any) {
+  private readonly currentModel;
+  constructor(modelRef) {
     this.currentModel = modelRef;
   }
   find(where: object, projection: object = {}) {
