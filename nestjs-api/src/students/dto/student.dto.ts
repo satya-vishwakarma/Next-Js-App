@@ -1,3 +1,4 @@
+import { Gender } from '@app/common/enums';
 import { IsNotEmpty } from 'class-validator';
 
 export class StudentDto {
@@ -15,4 +16,14 @@ export class StudentDto {
 
   @IsNotEmpty()
   class: string;
+
+
+  @IsNotEmpty()
+  dob: string;
+
+
+  @IsNotEmpty()
+  gender: Gender;
+
+
 }
