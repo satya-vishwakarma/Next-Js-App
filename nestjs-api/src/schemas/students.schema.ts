@@ -26,10 +26,10 @@ export class Students {
   status: number;
 
   @Prop({ required: true, type: String })
-  dob: string
+  dob: string;
 
   @Prop({ required: true, type: String })
-  gender: Gender
+  gender: Gender;
 
   @Prop({ required: true, default: Date.now })
   createdAt: Date;

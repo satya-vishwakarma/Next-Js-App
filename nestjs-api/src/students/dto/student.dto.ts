@@ -17,13 +17,9 @@ export class StudentDto {
   @IsNotEmpty()
   class: string;
 
-
   @IsNotEmpty()
   dob: string;
 
-
   @IsNotEmpty()
   gender: Gender;
-
-
 }
