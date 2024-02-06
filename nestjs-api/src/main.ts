@@ -22,6 +22,6 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
   await app.listen(portNumber);
-  console.log(`~ Application is running on: ${portNumber}`);
+  console.log(`~ Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
