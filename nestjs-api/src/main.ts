@@ -2,6 +2,7 @@ import { AppModule } from '@app/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import mongoose from 'mongoose';
 import { MongoExceptionFilter } from './common/filters/mongo-exception.filter';
 
 async function bootstrap() {
@@ -19,6 +20,8 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  if (config.get('NODE_ENV') === 'local') mongoose.set('debug', true);
 
   app.setGlobalPrefix('api');
   await app.listen(portNumber);
