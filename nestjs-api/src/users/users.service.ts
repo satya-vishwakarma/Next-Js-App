@@ -1,18 +1,18 @@
-import { Users } from '@app/schemas/users.schema';
 import { UserModel } from '@app/users/model/users.model';
 import { Injectable } from '@nestjs/common';
 
 import * as bcrypt from 'bcrypt';
+import { UserDto } from './dto/users.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private userModel: UserModel) {}
+  constructor(private userModel: UserModel) { }
 
   getAllUser() {
     return this.userModel.find({});
   }
 
-  async registerUser({ username, password, email }: Users): Promise<object> {
+  async registerUser({ username, password, email }: UserDto): Promise<object> {
     const hash = await bcrypt.hash(password, await bcrypt.genSalt());
     const prepareUserObj = {
       username,

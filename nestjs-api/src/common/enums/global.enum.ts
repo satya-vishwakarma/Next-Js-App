@@ -1,16 +1,17 @@
-export enum Status {
+export enum STATUS {
   ACTIVE = 1,
   DELETE = 0,
   INACTIVE = 2,
 }
 
-export enum Roles {
+export enum ROLES {
   ADMIN = 1,
   STUDENT = 2,
   TEACHER = 3,
+  GUEST = 4
 }
 
-export enum Gender {
+export enum GENDER {
   MALE = 'male',
   FEMALE = 'female',
 }

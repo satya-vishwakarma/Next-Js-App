@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Gender, Status } from './../common/enums/global.enum';
+import { GENDER, STATUS } from './../common/enums/global.enum';
 export type StudentsDocument = Students & Document;
 
 import { Schema as MongooseSchema } from 'mongoose';
@@ -22,14 +22,14 @@ export class Students {
   @Prop({ required: true, type: String })
   class: string;
 
-  @Prop({ required: true, default: Status.INACTIVE })
+  @Prop({ required: true, default: STATUS.INACTIVE })
   status: number;
 
   @Prop({ required: true, type: String })
   dob: string;
 
   @Prop({ required: true, type: String })
-  gender: Gender;
+  gender: GENDER;
 
   @Prop({ required: true, default: Date.now })
   createdAt: Date;
@@ -42,6 +42,9 @@ export class Students {
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users', default: null })
   updatedBy: MongooseSchema.Types.ObjectId;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users', default: null })
+  userId: MongooseSchema.Types.ObjectId
 }
 
 export const studentsSchema = SchemaFactory.createForClass(Students);

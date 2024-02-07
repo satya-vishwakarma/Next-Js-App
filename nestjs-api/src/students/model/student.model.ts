@@ -2,7 +2,7 @@ import { BaseModel } from '@app/common/model/baseModel.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Status } from '@app/common/enums';
+import { STATUS } from '@app/common/enums';
 import { Students } from '@app/schemas';
 
 export class StudentModel extends BaseModel {
@@ -21,16 +21,16 @@ export class StudentModel extends BaseModel {
             $switch: {
               branches: [
                 {
-                  case: { $eq: ['$status', Status.DELETE] },
+                  case: { $eq: ['$status', STATUS.DELETE] },
                   then: 'Deleted',
                 },
                 {
-                  case: { $eq: ['$status', Status.ACTIVE] },
+                  case: { $eq: ['$status', STATUS.ACTIVE] },
                   then: 'Active',
                 },
 
                 {
-                  case: { $eq: ['$status', Status.INACTIVE] },
+                  case: { $eq: ['$status', STATUS.INACTIVE] },
                   then: 'InActive',
                 },
               ],

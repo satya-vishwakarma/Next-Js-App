@@ -20,9 +20,9 @@ export class UserDto {
 
   @ApiProperty({ description: 'Email' })
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEmail()
-  email: string;
+  email?: string;
 
   @ApiProperty({
     description:
@@ -40,7 +40,7 @@ export class UserDto {
   password: string;
 
   @IsOptional()
-  isActive: boolean;
+  status: number;
 
   @IsOptional()
   createdAt: Date;
@@ -49,8 +49,5 @@ export class UserDto {
   updatedAt: Date;
 
   @IsOptional()
-  isDelete: boolean;
-
-  @IsOptional()
-  role: string;
+  role: [];
 }

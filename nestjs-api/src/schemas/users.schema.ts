@@ -1,22 +1,24 @@
+
+import { ROLES, STATUS } from '@app/common/enums';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 export type UsersDocument = Users & Document;
 @Schema({ collection: 'users' })
 export class Users {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: false })
   email: string;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   username: string;
 
   @Prop({ required: true })
   password: string;
 
-  @Prop({ required: true, default: '1' })
+  @Prop({ required: true, default: ROLES.GUEST })
   role: string;
 
-  @Prop({ required: true, default: true })
-  isActive: boolean;
+  @Prop({ required: true, default: STATUS.INACTIVE })
+  status: boolean;
 
   @Prop({ required: true, default: Date.now })
   createdAt: Date;
@@ -24,8 +26,9 @@ export class Users {
   @Prop({ required: true, default: Date.now })
   updatedAt: Date;
 
-  @Prop({ required: true, default: false })
-  isDelete: boolean;
+
 }
 
+
 export const usersSchema = SchemaFactory.createForClass(Users);
+usersSchema.index({ email: 1, username: 1 }, { unique: true })

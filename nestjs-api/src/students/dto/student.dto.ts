@@ -1,4 +1,4 @@
-import { Gender } from '@app/common/enums';
+import { GENDER } from '@app/common/enums';
 import { IsNotEmpty } from 'class-validator';
 
 export class StudentDto {
@@ -21,5 +21,5 @@ export class StudentDto {
   dob: string;
 
   @IsNotEmpty()
-  gender: Gender;
+  gender: GENDER;
 }
