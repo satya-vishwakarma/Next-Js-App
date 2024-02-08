@@ -18,7 +18,7 @@ export class Users {
   role: string;
 
   @Prop({ required: true, default: STATUS.INACTIVE })
-  status: boolean;
+  status: number;
 
   @Prop({ required: true, default: Date.now })
   createdAt: Date;

@@ -22,7 +22,10 @@ export class UsersService {
     await this.userModel.save(prepareUserObj);
     return this.userModel.find(
       { email: email },
-      { password: 0, isActive: 0, isDelete: 0, __v: 0 },
+      {
+        password: 0,
+        __v: 0
+      },
     );
   }
 
