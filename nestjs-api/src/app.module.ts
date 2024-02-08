@@ -1,13 +1,15 @@
 import { AppController } from '@app/app.controller';
 import { AppService } from '@app/app.service';
 import { config } from '@configs';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { StudentsModule } from '@app/students/students.module';
 import { UsersModule } from '@app/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
+import { excludeRoutes } from './routes/excludeRoutes';
 
 @Module({
   imports: [
@@ -32,6 +34,10 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    excludeRoutes(consumer);
+  }
+}

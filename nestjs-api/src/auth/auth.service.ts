@@ -9,7 +9,7 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
   async signIn(username: string, pass: string): Promise<any> {
     try {
@@ -18,7 +18,7 @@ export class AuthService {
         status: STATUS.ACTIVE,
       });
 
-      const { password, username: userName, _id, role } = users;
+      const { password, username: userName, _id, role, email, status } = users;
 
       const validatePassword = await this.usersService.comparePassword({
         requestPassword: pass,
@@ -30,6 +30,10 @@ export class AuthService {
       }
       const payload = { userId: _id, username: userName, roles: role };
       return {
+        userName,
+        role,
+        email,
+        status,
         access_token: await this.jwtService.signAsync(payload, {
           secret: jwtConstants.secret,
         }),
