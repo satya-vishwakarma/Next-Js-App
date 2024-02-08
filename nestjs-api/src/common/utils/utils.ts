@@ -1,7 +1,6 @@
-
 /**
  * Genrate rendom User Name
- * 
+ *
  * @returns String
  */
 

@@ -1,4 +1,3 @@
-
 import { ROLES, STATUS } from '@app/common/enums';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
@@ -25,10 +24,7 @@ export class Users {
 
   @Prop({ required: true, default: Date.now })
   updatedAt: Date;
-
-
 }
 
-
 export const usersSchema = SchemaFactory.createForClass(Users);
-usersSchema.index({ email: 1, username: 1 }, { unique: true })
+usersSchema.index({ email: 1, username: 1 }, { unique: true });

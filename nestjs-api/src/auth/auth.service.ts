@@ -6,10 +6,10 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor
-    (private readonly usersService: UsersService,
-      private readonly jwtService: JwtService
-    ) { }
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async signIn(username: string, pass: string): Promise<any> {
     try {
@@ -18,28 +18,24 @@ export class AuthService {
         status: STATUS.ACTIVE,
       });
 
-      const {
-        password,
-        username: userName,
-        _id, role
-      } = users
+      const { password, username: userName, _id, role } = users;
 
       const validatePassword = await this.usersService.comparePassword({
         requestPassword: pass,
         hashPassword: password,
       });
 
-
-
       if (!validatePassword) {
         throw new UnauthorizedException();
       }
       const payload = { userId: _id, username: userName, roles: role };
       return {
-        access_token: await this.jwtService.signAsync(payload, { secret: jwtConstants.secret }),
+        access_token: await this.jwtService.signAsync(payload, {
+          secret: jwtConstants.secret,
+        }),
       };
     } catch (error) {
-      Logger.error(error)
+      Logger.error(error);
       throw new UnauthorizedException();
     }
   }

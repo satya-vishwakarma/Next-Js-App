@@ -44,7 +44,7 @@ export class Students {
   updatedBy: MongooseSchema.Types.ObjectId;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users', default: null })
-  userId: MongooseSchema.Types.ObjectId
+  userId: MongooseSchema.Types.ObjectId;
 }
 
 export const studentsSchema = SchemaFactory.createForClass(Students);

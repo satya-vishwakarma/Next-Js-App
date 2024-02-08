@@ -11,10 +11,10 @@ import { StudentsService } from './students.service';
   imports: [
     MongooseModule.forFeature([
       { name: Students.name, schema: studentsSchema },
-      { name: Users.name, schema: usersSchema }
+      { name: Users.name, schema: usersSchema },
     ]),
   ],
   providers: [StudentsService, StudentModel, UserModel, UsersService],
   controllers: [StudentsController],
 })
-export class StudentsModule { }
+export class StudentsModule {}

@@ -12,8 +12,9 @@ import { AuthService } from './auth.service';
       global: true,
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60s' },
-    }),],
+    }),
+  ],
   providers: [AuthService, JwtService],
-  controllers: [AuthController]
+  controllers: [AuthController],
 })
-export class AuthModule { }
+export class AuthModule {}

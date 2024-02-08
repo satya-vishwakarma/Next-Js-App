@@ -9,7 +9,7 @@ export class StudentsService {
   constructor(
     private readonly studentModel: StudentModel,
     private readonly usersService: UsersService,
-  ) { }
+  ) {}
 
   createStudent(body: StudentDto) {
     console.log(body, randomUserName());

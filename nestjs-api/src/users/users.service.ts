@@ -6,7 +6,7 @@ import { UserDto } from './dto/users.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private userModel: UserModel) { }
+  constructor(private userModel: UserModel) {}
 
   getAllUser() {
     return this.userModel.find({});
@@ -24,7 +24,7 @@ export class UsersService {
       { email: email },
       {
         password: 0,
-        __v: 0
+        __v: 0,
       },
     );
   }
