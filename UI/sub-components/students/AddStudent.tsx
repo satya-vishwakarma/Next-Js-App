@@ -2,12 +2,14 @@
 import { ErrorMessage, Formik } from 'formik';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { addStudent as addStudentRed } from '../../lib/redux/features/student';
-import { RootState } from '../../lib/redux/store';
+
+
 import { AddStudentSchema } from '../../validation';
 
+import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getUser } from '../../redux/slices/usersSlices';
 
 const initialValues = {
   firstName: '',
@@ -18,10 +20,20 @@ const initialValues = {
 };
 
 const AddStudent = () => {
-  const count = JSON.stringify(
-    useSelector((state: RootState) => state.student.studenList),
-  );
-  const dispatch = useDispatch();
+
+  const dispatch = useAppDispatch();
+
+  const user = useAppSelector(state => state.users.data)
+
+
+  useEffect(() => {
+
+    dispatch(getUser())
+
+  }, [])
+
+
+  console.log(user)
 
   const classList = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -53,7 +65,7 @@ const AddStudent = () => {
               validationSchema={AddStudentSchema}
               onSubmit={(values: any, { setSubmitting, resetForm }) => {
                 setTimeout(() => {
-                  dispatch(addStudentRed(values));
+                  // dispatch(addStudentRed(values));
                   toast.success('Student save successfully.');
                   setSubmitting(false);
                   resetForm();
