@@ -9,6 +9,7 @@ import { UsersModule } from '@app/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
+import { ModulesModule } from './modules/modules.module';
 import { excludeRoutes } from './routes/excludeRoutes';
 
 @Module({
@@ -32,6 +33,7 @@ import { excludeRoutes } from './routes/excludeRoutes';
     UsersModule,
     StudentsModule,
     AuthModule,
+    ModulesModule,
   ],
   controllers: [AppController],
   providers: [AppService, AuthService],
