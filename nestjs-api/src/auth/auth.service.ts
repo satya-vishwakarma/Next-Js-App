@@ -9,7 +9,7 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
-  ) { }
+  ) {}
 
   async signIn(username: string, pass: string): Promise<any> {
     try {
