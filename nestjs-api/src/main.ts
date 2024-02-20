@@ -11,7 +11,7 @@ async function bootstrap() {
   const portNumber = config.get('port');
 
   app.useGlobalFilters(new MongoExceptionFilter());
-
+  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

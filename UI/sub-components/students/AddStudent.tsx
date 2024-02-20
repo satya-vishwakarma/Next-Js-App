@@ -2,8 +2,6 @@
 import { ErrorMessage, Formik } from 'formik';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 
-
-
 import { AddStudentSchema } from '../../validation';
 
 import { useEffect } from 'react';
@@ -20,20 +18,15 @@ const initialValues = {
 };
 
 const AddStudent = () => {
-
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector(state => state.users.data)
-
+  const user = useAppSelector((state) => state.users.data);
 
   useEffect(() => {
+    dispatch(getUser());
+  }, []);
 
-    dispatch(getUser())
-
-  }, [])
-
-
-  console.log(user)
+  console.log(user);
 
   const classList = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -173,7 +166,9 @@ const AddStudent = () => {
                       >
                         <option value="">Please select</option>
                         {classList.map((i) => (
-                          <option key={i} value={i}>{ordinal_suffix_of(i)}</option>
+                          <option key={i} value={i}>
+                            {ordinal_suffix_of(i)}
+                          </option>
                         ))}
                       </Form.Select>
                       <ErrorMessage name="class" component="div" />
