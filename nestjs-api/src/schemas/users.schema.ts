@@ -16,6 +16,9 @@ export class Users {
   @Prop({ required: true, default: ROLES.GUEST })
   role: string;
 
+  @Prop({ required: true })
+  profileImage: string;
+
   @Prop({ required: true, default: STATUS.INACTIVE })
   status: number;
 

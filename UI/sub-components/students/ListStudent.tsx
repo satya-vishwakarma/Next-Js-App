@@ -5,7 +5,10 @@ import { RootState } from '../../lib/redux/store';
 
 const StudentList = () => {
   const ListStudent = useSelector(
-    (state: RootState) => state.student.studenList,
+    (state: RootState) => {
+      console.log(state , "---------------------")
+      return  state.student?.studenList
+    },
   );
 
   return (
@@ -22,7 +25,7 @@ const StudentList = () => {
         </tr>
       </thead>
       <tbody>
-        {ListStudent.map((i: student, index) => (
+        {ListStudent && ListStudent.map((i: student, index) => (
           <tr key={index}>
             <th scope="row"> {index + 1} </th>
             <td>{i.firstName}</td>

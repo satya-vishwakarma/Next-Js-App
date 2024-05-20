@@ -25,10 +25,10 @@ export class Students {
   @Prop({ required: true, default: STATUS.INACTIVE })
   status: number;
 
-  @Prop({ required: true, type: String })
+  @Prop({ required: true, type: Date })
   dob: string;
 
-  @Prop({ required: true, type: String })
+  @Prop({ required: true, type: String, enum: GENDER })
   gender: GENDER;
 
   @Prop({ required: true, default: Date.now })
@@ -43,8 +43,8 @@ export class Students {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users', default: null })
   updatedBy: MongooseSchema.Types.ObjectId;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users', default: null })
-  userId: MongooseSchema.Types.ObjectId;
+  /* @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users', default: null })
+  userId: MongooseSchema.Types.ObjectId; */
 }
 
 export const studentsSchema = SchemaFactory.createForClass(Students);

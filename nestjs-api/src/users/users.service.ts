@@ -12,12 +12,18 @@ export class UsersService {
     return this.userModel.find({});
   }
 
-  async registerUser({ username, password, email }: UserDto): Promise<object> {
+  async registerUser({
+    username,
+    password,
+    email,
+    profileImage,
+  }: UserDto): Promise<object> {
     const hash = await bcrypt.hash(password, await bcrypt.genSalt());
     const prepareUserObj = {
       username,
       password: hash,
       email,
+      profileImage,
     };
     await this.userModel.save(prepareUserObj);
     return this.userModel.find(

@@ -1,8 +1,12 @@
+import { ROLES, STATUS } from '@app/common/enums';
+import { fileInterFace } from '@app/common/interfaces';
 import { randomUserName } from '@app/common/utils';
 import { UsersService } from '@app/users/users.service';
 import { Injectable } from '@nestjs/common';
 import { StudentDto } from './dto/student.dto';
 import { StudentModel } from './model/student.model';
+
+import { Types } from 'mongoose';
 
 @Injectable()
 export class StudentsService {
@@ -11,28 +15,42 @@ export class StudentsService {
     private readonly usersService: UsersService,
   ) {}
 
-  createStudent(body: StudentDto) {
-    console.log(body, randomUserName());
+  async createStudent(
+    {
+      body,
+      files,
+    }: {
+      body: StudentDto;
+      files: fileInterFace;
+    },
+    request,
+  ) {
+    const { filename } = files;
 
-    // const prePareRegData = {
-    //   username: randomUserName(),
+    const { userId: _id } = request['user'];
 
-    //   password: '',
+    const userId = new Types.ObjectId(_id);
 
-    //   role: '',
+    const prePareRegData = {
+      username: randomUserName(),
+      password: 'Test@123',
+      role: [ROLES.STUDENT],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      profileImage: filename,
+      status: STATUS.INACTIVE,
+    };
 
-    //   isActive: true,
+    console.log(prePareRegData, 'prePareRegData');
 
-    //   createdAt: new Date(),
-
-    //   updatedAt: new Date(),
-
-    //   //   isDelete: false,
-    // };
-
-    // this.usersService.registerUser(prePareRegData);
-
-    // return this.studentModel.save(body);
+    await this.usersService.registerUser(prePareRegData);
+    return this.studentModel.save({
+      ...body,
+      ...{
+        createdBy: userId,
+        updatedBy: userId,
+      },
+    });
   }
 
   getAllStudent() {

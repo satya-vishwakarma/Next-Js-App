@@ -19,14 +19,13 @@ export class UserDto {
   username: string;
 
   @ApiProperty({ description: 'Email' })
-  @ApiProperty()
   @IsOptional()
   @IsEmail()
   email?: string;
 
   @ApiProperty({
     description:
-      'password should be minimum 8 characters at least one letter and one number',
+      'password should be minimum 8 characters with at least one letter and one number',
     minimum: 1,
     maximum: 20,
   })
@@ -40,14 +39,18 @@ export class UserDto {
   password: string;
 
   @IsOptional()
-  status: number;
+  @IsString()
+  profileImage?: string;
 
   @IsOptional()
-  createdAt: Date;
+  createdAt?: Date;
 
   @IsOptional()
-  updatedAt: Date;
+  updatedAt?: Date;
 
   @IsOptional()
-  role: [];
+  role: number[];
+
+  @IsOptional()
+  status?: number;
 }
