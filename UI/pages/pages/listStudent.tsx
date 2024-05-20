@@ -18,3 +18,5 @@ const ListStudentPage = () => {
 };
 
 export default ListStudentPage;
+
+ListStudentPage.auth = true;
