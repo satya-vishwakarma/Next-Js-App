@@ -16,6 +16,29 @@ export class StudentModel extends BaseModel {
   getStudentWithAgg() {
     return this.studentModel.aggregate([
       {
+        $lookup: {
+          from: 'users',
+          localField: 'userId',
+          foreignField: '_id',
+          as: 'users',
+          pipeline: [
+            {
+              $project: {
+                profileImage: 1,
+                status: 1,
+              },
+            },
+          ],
+        },
+      },
+
+      {
+        $unwind: {
+          path: '$users',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
         $addFields: {
           statusLabel: {
             $switch: {

@@ -41,6 +41,9 @@ export class Students {
   createdBy: MongooseSchema.Types.ObjectId;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users', default: null })
+  userId: MongooseSchema.Types.ObjectId;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users', default: null })
   updatedBy: MongooseSchema.Types.ObjectId;
 
   /* @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users', default: null })

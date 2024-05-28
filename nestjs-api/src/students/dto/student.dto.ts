@@ -22,4 +22,7 @@ export class StudentDto {
 
   @IsNotEmpty()
   gender: GENDER;
+
+  @IsNotEmpty()
+  email: string;
 }

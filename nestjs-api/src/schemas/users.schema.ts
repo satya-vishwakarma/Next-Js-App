@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 export type UsersDocument = Users & Document;
 @Schema({ collection: 'users' })
 export class Users {
-  @Prop({ required: false })
+  @Prop({ required: true, unique: true })
   email: string;
 
   @Prop({ required: true })
@@ -30,4 +30,5 @@ export class Users {
 }
 
 export const usersSchema = SchemaFactory.createForClass(Users);
-usersSchema.index({ email: 1, username: 1 }, { unique: true });
+//usersSchema.index({ email: 1, username: 1 }, { unique: true });
+//usersSchema.index({ email: 1 }, { unique: true });

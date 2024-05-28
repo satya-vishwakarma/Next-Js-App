@@ -54,13 +54,30 @@ export const DropFiles = (props) => {
 
   console.log(acceptedFiles, 'ppppppppppppppppp');
 
-  const thumbs = files.map((file) => (
+  const iconStyle = {
+    cursor: 'pointer',
+  };
+
+  const removeFile = (index) => {
+    const newFiles = [...files];
+    newFiles.splice(index, 1);
+
+    setFiles(newFiles);
+    props.onCallback(newFiles);
+  };
+
+  const thumbs = files.map((file, index) => (
     <>
       <div style={thumb} key={file.name}>
         <div style={thumbInner}>
           <Image src={file.preview} style={img} alt={file.name} />
         </div>
       </div>
+      <i
+        className="fa fa-trash fs-3"
+        onClick={() => removeFile(index)}
+        style={iconStyle}
+      ></i>
     </>
   ));
 

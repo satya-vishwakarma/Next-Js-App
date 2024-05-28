@@ -14,8 +14,6 @@ import DateRangePicker from 'react-bootstrap-daterangepicker';
 import axiosInstance from '@/lib/axios-instance';
 import { DropFiles } from './../../widgets';
 
-let data: any = new FormData();
-
 interface InitialValues {
   firstName: string;
   lastName: string;
@@ -41,7 +39,7 @@ const initialValues: InitialValues = {
 const AddStudent = () => {
   const addStudent = async (formData: InitialValues) => {
     try {
-      console.log(formData);
+      let data: any = new FormData();
       for (const [key, value] of Object.entries(formData)) {
         data.append(key, value);
       }
@@ -84,9 +82,12 @@ const AddStudent = () => {
               initialValues={initialValues}
               validationSchema={AddStudentSchema}
               onSubmit={async (values: any, { setSubmitting, resetForm }) => {
-                await addStudent(values);
-                setSubmitting(false);
-                resetForm();
+                try {
+                  await addStudent(values);
+                  setSubmitting(false);
+                  resetForm();
+                } catch (error) {}
+
                 /*    setTimeout(() => {
                   addStudent();
                   // dispatch(addStudentRed(values));
