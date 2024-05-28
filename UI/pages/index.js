@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 // import widget/custom components
-import { StatRightTopIcon } from 'widgets';
+import { StatRightTopIcon } from '@/widgets';
 
 // import sub components
 import { ActiveProjects, TasksPerformance, Teams } from '@/sub-components';

@@ -2,7 +2,7 @@
 import { Button, Card, Col, Form, Image, Row } from 'react-bootstrap';
 
 // import widget as custom components
-import { DropFiles, FormSelect } from 'widgets';
+import { DropFiles, FormSelect } from '@/widgets';
 
 const GeneralSetting = () => {
   const countryOptions = [

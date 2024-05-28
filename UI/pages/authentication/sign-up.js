@@ -1,14 +1,14 @@
 // import node module libraries
-import { Row, Col, Card, Form, Button, Image } from "react-bootstrap";
-import Link from "next/link";
+import Link from 'next/link';
+import { Button, Card, Col, Form, Image, Row } from 'react-bootstrap';
 
 // import authlayout to override default layout
-import AuthLayout from "layouts/AuthLayout";
+import AuthLayout from '@/layouts/AuthLayout';
 
 const SignUp = () => {
   return (
     <Row className="align-items-center justify-content-center g-0 min-vh-100">
-      <Col xxl={4} lg={6} md={8} xs={12} className="py-8 py-xl-0">
+      <Col xxl={4} lg={6} md={8} xs={12} className="py-xl-0 py-8">
         {/* Card */}
         <Card className="smooth-shadow-md">
           {/* Card body */}
@@ -74,7 +74,7 @@ const SignUp = () => {
                 <Form.Check type="checkbox" id="check-api-checkbox">
                   <Form.Check.Input type="checkbox" />
                   <Form.Check.Label>
-                    I agree to the <Link href="#"> Terms of Service </Link> and{" "}
+                    I agree to the <Link href="#"> Terms of Service </Link> and{' '}
                     <Link href="#"> Privacy Policy.</Link>
                   </Form.Check.Label>
                 </Form.Check>
@@ -88,15 +88,15 @@ const SignUp = () => {
                   </Button>
                 </div>
                 <div className="d-md-flex justify-content-between mt-4">
-                  <div className="mb-2 mb-md-0">
+                  <div className="mb-md-0 mb-2">
                     <Link href="/authentication/sign-in" className="fs-5">
-                      Already member? Login{" "}
+                      Already member? Login{' '}
                     </Link>
                   </div>
                   <div>
                     <Link
                       href="/authentication/forget-password"
-                      className="text-inherit fs-5"
+                      className="fs-5 text-inherit"
                     >
                       Forgot your password?
                     </Link>

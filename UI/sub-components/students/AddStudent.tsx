@@ -4,13 +4,14 @@ import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 
 import { AddStudentSchema } from '../../validation';
 
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 import 'bootstrap-daterangepicker/daterangepicker.css';
 import FormData from 'form-data';
 import moment from 'moment';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 
+import axiosInstance from '@/lib/axios-instance';
 import { DropFiles } from './../../widgets';
 
 let data: any = new FormData();
@@ -23,6 +24,7 @@ interface InitialValues {
   class: string;
   gender: string;
   dob: string;
+  image: object;
 }
 
 const initialValues: InitialValues = {
@@ -33,16 +35,24 @@ const initialValues: InitialValues = {
   class: '',
   gender: '',
   dob: '',
+  image: {},
 };
 
 const AddStudent = () => {
   const addStudent = async (formData: InitialValues) => {
-    console.log(formData);
-    for (const [key, value] of Object.entries(formData)) {
-      data.append(key, value);
-    }
+    try {
+      console.log(formData);
+      for (const [key, value] of Object.entries(formData)) {
+        data.append(key, value);
+      }
 
-    // const response = await axiosInstance.post('students', data);
+      const response = await axiosInstance.post('students', data);
+
+      toast.success('Student save successfully.');
+      return response;
+    } catch (error) {
+      toast.error('Error');
+    }
   };
 
   const classList = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -73,8 +83,10 @@ const AddStudent = () => {
             <Formik
               initialValues={initialValues}
               validationSchema={AddStudentSchema}
-              onSubmit={(values: any, { setSubmitting, resetForm }) => {
-                addStudent(values);
+              onSubmit={async (values: any, { setSubmitting, resetForm }) => {
+                await addStudent(values);
+                setSubmitting(false);
+                resetForm();
                 /*    setTimeout(() => {
                   addStudent();
                   // dispatch(addStudentRed(values));
@@ -271,12 +283,12 @@ const AddStudent = () => {
 
                     <Col md={8} xs={12}>
                       <div className="dropzone mb-3 border-dashed py-10">
-                        <DropFiles />
+                        <DropFiles
+                          onCallback={(data: any) => {
+                            setFieldValue('image', data[0]);
+                          }}
+                        />
                       </div>
-
-                      <Button variant="outline-white" type="submit">
-                        Change
-                      </Button>
                     </Col>
 
                     <Col md={{ offset: 4, span: 8 }} xs={12} className="mt-4">

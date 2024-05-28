@@ -1,10 +1,10 @@
 // import node module libraries
-import { Fragment } from "react";
-import { Col, Row, Image } from "react-bootstrap";
-import Link from "next/link";
+import Link from 'next/link';
+import { Fragment } from 'react';
+import { Col, Image, Row } from 'react-bootstrap';
 
 // import blank layout, header and footer to override default layout
-import NotFound from "layouts/NotFound";
+import NotFound from '@/layouts/NotFound';
 
 const Error404 = () => {
   return (

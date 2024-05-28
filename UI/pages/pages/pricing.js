@@ -1,14 +1,14 @@
 // import node module libraries
 import Link from 'next/link';
-import { Col, Row, Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 
 // import sub components
-import { PricingCard, PageHeading, FeatureLeftTopIcon } from 'widgets'
+import { FeatureLeftTopIcon, PageHeading, PricingCard } from '@/widgets';
 
 // import data files
-import { standard, multisite, extended } from 'data/pricing/PricingPlansData';
-import FAQsData from 'data/pricing/FAQsData';
-import FeaturesData from 'data/pricing/FeaturesData';
+import FAQsData from '@/data/pricing/FAQsData';
+import FeaturesData from '@/data/pricing/FeaturesData';
+import { extended, multisite, standard } from '@/data/pricing/PricingPlansData';
 
 const Pricing = () => {
   return (
@@ -20,13 +20,19 @@ const Pricing = () => {
           <Col xl={{ span: 10, offset: 1 }} md={12}>
             <Row className="mb-10">
               <Col md={12} xs={12} className="mb-6">
-                <h1 className="display-4 fw-bold ls-sm">Find a plan that s right for you</h1>
+                <h1 className="display-4 fw-bold ls-sm">
+                  Find a plan that s right for you
+                </h1>
                 <div className="d-lg-flex align-items-center mt-4">
                   <div>
-                    <p className="mb-lg-0">Or simply leverage the expertise of our consultation team.</p>
+                    <p className="mb-lg-0">
+                      Or simply leverage the expertise of our consultation team.
+                    </p>
                   </div>
-                  <div className="ms-0 ms-lg-3">
-                    <Link href="#" className="btn btn-outline-primary btn-sm">Talk to us</Link>
+                  <div className="ms-lg-3 ms-0">
+                    <Link href="#" className="btn btn-outline-primary btn-sm">
+                      Talk to us
+                    </Link>
                   </div>
                 </div>
               </Col>
@@ -47,7 +53,9 @@ const Pricing = () => {
               <Col lg={12} md={12} xs={12}>
                 <div className="mb-6">
                   <h2>Everything you need to build efficiently</h2>
-                  <p>Start building your app using our tools, be efficient, spend less time with details more time with your business.
+                  <p>
+                    Start building your app using our tools, be efficient, spend
+                    less time with details more time with your business.
                   </p>
                 </div>
               </Col>
@@ -57,7 +65,7 @@ const Pricing = () => {
                   <Col lg={4} md={6} xs={12} key={index}>
                     <FeatureLeftTopIcon item={item} />
                   </Col>
-                )
+                );
               })}
             </Row>
             <Row>
@@ -82,7 +90,7 @@ const Pricing = () => {
         </Row>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default Pricing
+export default Pricing;

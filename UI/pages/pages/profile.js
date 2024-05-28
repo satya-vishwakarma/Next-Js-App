@@ -1,8 +1,8 @@
 // import node module libraries
-import { Col, Row, Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 
 // import widget as custom components
-import { PageHeading } from 'widgets'
+import { PageHeading } from '@/widgets';
 
 // import sub components
 import {
@@ -11,14 +11,14 @@ import {
   MyTeam,
   ProfileHeader,
   ProjectsContributions,
-  RecentFromBlog
-} from 'sub-components'
+  RecentFromBlog,
+} from 'sub-components';
 
 const Profile = () => {
   return (
     <Container fluid className="p-6">
       {/* Page Heading */}
-      <PageHeading heading="Overview"/>
+      <PageHeading heading="Overview" />
 
       {/* Profile Header  */}
       <ProfileHeader />
@@ -26,7 +26,6 @@ const Profile = () => {
       {/* content */}
       <div className="py-6">
         <Row>
-
           {/* About Me */}
           <AboutMe />
 
@@ -37,19 +36,16 @@ const Profile = () => {
           <RecentFromBlog />
 
           <Col xl={6} lg={12} md={12} xs={12} className="mb-6">
-
             {/* My Team */}
             <MyTeam />
 
             {/* Activity Feed */}
             <ActivityFeed />
-
           </Col>
         </Row>
       </div>
-
     </Container>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

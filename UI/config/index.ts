@@ -1,4 +1,4 @@
-import getConfig from 'next/config'
-const { publicRuntimeConfig: config } = getConfig()
+import getConfig from 'next/config';
+const { publicRuntimeConfig: config } = getConfig();
 
-export default config
+export default config;
