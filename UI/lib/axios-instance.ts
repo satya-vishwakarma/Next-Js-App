@@ -1,17 +1,18 @@
-import getConfig from '@app/config';
+import config from '@/config';
 import axios from 'axios';
 import { getSession, signOut } from 'next-auth/react';
 
-const { apiUrl } = getConfig();
+const { apiBaseUrl } = config;
 
 const axiosInstance = axios.create({
-  baseURL: apiUrl,
+  baseURL: apiBaseUrl,
 });
 
 axiosInstance.interceptors.request.use(
   async (config) => {
     const session: any = await getSession();
-    const token = session?.user?.token;
+
+    const token = session?.user?.access_token;
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }

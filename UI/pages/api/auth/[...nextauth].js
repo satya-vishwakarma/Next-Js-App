@@ -1,74 +1,65 @@
+import config from '@/config';
+import axios from 'axios';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOptions = {
-  // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
-      type: 'credentials',
       name: 'Email and Password',
-
       credentials: {
         username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
         password: { label: 'Password', type: 'password' },
       },
-
-      authorize: async (credentials, req) => {
+      async authorize(credentials) {
         const payload = {
-          email: credentials?.username,
-          password: credentials?.password,
+          username: credentials.username,
+          password: credentials.password,
         };
-        const url = config?.apiBaseUrl;
-        let res = null;
-        console.log(url, 'url');
+        const url = config?.apiBaseUrl + '/auth/login';
+
         try {
-          res = await axios.post(url + '/user/login', payload);
-        } catch (err) {
-          const error = err;
-          let errorData = error.response?.data;
-          let errorMessage = errorData['message'];
-          if (errorMessage) {
-            console.log('------------>', errorMessage);
-            throw new Error(errorMessage);
-          } else {
-            console.log('------dddddddddd------>', errorMessage);
-            throw new Error('Something went wrong! please try again later.');
-          }
+          const response = await axios.post(url, payload);
+
+          //    console.log(response.data, 'response.data');
+
+          const { userName, role, email, access_token, _id } = response.data;
+
+          return {
+            _id,
+            access_token,
+            email,
+            role,
+            userName,
+          };
+        } catch (error) {
+          throw new Error(error.response.data.message);
         }
-        const users = res;
-
-        const details = users.data.data.user;
-        const token = users.data.data.accessToken;
-
-        const user = {
-          id: details._id,
-          token,
-        };
-
-        if (user) {
-          return user;
-        }
-
-        return null;
       },
     }),
-
-    /*  GithubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
-    }), */
-    // ...add more providers here
   ],
 
+  port: 8081,
   pages: {
-    signIn: '/', // Redirects to login screen when tried to access any page without logging in
+    signIn: '/',
     signOut: '/',
-    error: '/', // Error code passed in query string as ?error=
-    verifyRequest: '/auth/verify-request', // (used for check email message)
-    newUser: '/auth/new-user', // New users will be directed here on first sign in (leave the property out if not of interest)
+    error: '/',
+    verifyRequest: '/auth/verify-request',
+    newUser: '/auth/new-user',
   },
 
   callbacks: {
+    /*     async signIn({ user, account, profile, email, credentials }) {
+      const router = useRouter();
+
+      console.log(user, 'user');
+      if (!user.error) {
+        router.push('/dashboard'); // Redirect to dashboard on successful login
+      }
+      return false; // Prevent NextAuth default redirect behavior
+    },
+ */
+
     async signIn({ user, account, profile, email, credentials }) {
       if (user.hasOwnProperty('error')) {
         let userError = user?.error;
@@ -76,45 +67,29 @@ export const authOptions = {
       }
       return true;
     },
-
     async jwt({ user, token, session, trigger, account, profile }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       user && (token.user = user);
 
+      /* // console.log(trigger, 'trigger');
       if (trigger === 'update') {
-        if (typeof session.isUSCitizenship !== 'undefined') {
-          token.user.isUSCitizenship = session.isUSCitizenship;
-        }
         if (typeof session.accessToken !== 'undefined') {
-          token.user.token = session.accessToken;
-          delete token.user.challengeName;
+      //    token.user.token = session.accessToken;
         }
-      }
+      } */
       return token;
-      // if (Date.now() < token?.user?.accessTokenExpires - 900000) {
-      //   token.user.idleTime = Date.now()
-      //   return token
-      // } else if (
-      //   Date.now() <
-      //   (token && token.user.idleTime + token?.user?.expiresIn * 1000)
-      // ) {
-      //   token.user.idleTime = Date.now()
-      //   return refreshAccessToken(token)
-      // } else {
-      //   return token
-      // }
     },
 
     async session({ session, token }) {
-      console.log('------------------?>?>', session);
-      session.user.id = token.sub;
+      if (token) {
+        session.user = { ...token.user }; // Set session data to the token
+      }
 
-      return session; // The return type will match the one returned in `useSession()`
+      return session;
     },
   },
+
   secret: process.env.AUTH_SECRET,
 };
-
-console.log('Next Auth');
 
 export default NextAuth(authOptions);

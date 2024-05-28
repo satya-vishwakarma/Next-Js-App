@@ -1,24 +1,24 @@
 // import node module libraries
-import { Fragment, useContext } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useMediaQuery } from "react-responsive";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Fragment, useContext } from 'react';
 import {
-  ListGroup,
   Accordion,
+  AccordionContext,
+  Badge,
   Card,
   Image,
-  Badge,
+  ListGroup,
   useAccordionButton,
-  AccordionContext,
-} from "react-bootstrap";
+} from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
 // import simple bar scrolling used for notification item scrolling
-import SimpleBar from "simplebar-react";
-import "simplebar/dist/simplebar.min.css";
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
 
 // import routes file
-import { DashboardMenu } from "routes/DashboardRoutes";
+import { DashboardMenu } from '@/routes/DashboardRoutes';
 
 const NavbarVertical = (props) => {
   const location = useRouter();
@@ -26,7 +26,7 @@ const NavbarVertical = (props) => {
   const CustomToggle = ({ children, eventKey, icon }) => {
     const { activeEventKey } = useContext(AccordionContext);
     const decoratedOnClick = useAccordionButton(eventKey, () =>
-      console.log("totally custom!")
+      console.log('totally custom!'),
     );
     const isCurrentEventKey = activeEventKey === eventKey;
     return (
@@ -40,7 +40,7 @@ const NavbarVertical = (props) => {
           aria-expanded={isCurrentEventKey ? true : false}
           aria-controls="navDashboard"
         >
-          {icon ? <i className={`nav-icon fe fe-${icon} me-2`}></i> : ""}{" "}
+          {icon ? <i className={`nav-icon fe fe-${icon} me-2`}></i> : ''}{' '}
           {children}
         </Link>
       </li>
@@ -49,7 +49,7 @@ const NavbarVertical = (props) => {
   const CustomToggleLevel2 = ({ children, eventKey, icon }) => {
     const { activeEventKey } = useContext(AccordionContext);
     const decoratedOnClick = useAccordionButton(eventKey, () =>
-      console.log("totally custom!")
+      console.log('totally custom!'),
     );
     const isCurrentEventKey = activeEventKey === eventKey;
     return (
@@ -72,23 +72,23 @@ const NavbarVertical = (props) => {
       <Link
         href={item.link}
         className={`nav-link ${
-          location.pathname === item.link ? "active" : ""
+          location.pathname === item.link ? 'active' : ''
         }`}
         onClick={(e) =>
           isMobile ? props.onClick(!props.showMenu) : props.showMenu
         }
       >
         {item.name}
-        {""}
+        {''}
         {item.badge ? (
           <Badge
             className="ms-1"
-            bg={item.badgecolor ? item.badgecolor : "primary"}
+            bg={item.badgecolor ? item.badgecolor : 'primary'}
           >
             {item.badge}
           </Badge>
         ) : (
-          ""
+          ''
         )}
       </Link>
     );
@@ -98,7 +98,7 @@ const NavbarVertical = (props) => {
 
   return (
     <Fragment>
-      <SimpleBar style={{ maxHeight: "100vh" }}>
+      <SimpleBar style={{ maxHeight: '100vh' }}>
         <div className="nav-scroller">
           <Link href="/" className="navbar-brand">
             <Image src="/images/brand/logo/logo.svg" alt="" />
@@ -129,12 +129,12 @@ const NavbarVertical = (props) => {
                       {menu.badge ? (
                         <Badge
                           className="ms-1"
-                          bg={menu.badgecolor ? menu.badgecolor : "primary"}
+                          bg={menu.badgecolor ? menu.badgecolor : 'primary'}
                         >
                           {menu.badge}
                         </Badge>
                       ) : (
-                        ""
+                        ''
                       )}
                     </CustomToggle>
                     <Accordion.Collapse
@@ -147,154 +147,155 @@ const NavbarVertical = (props) => {
                         bsPrefix=""
                         className="nav flex-column"
                       >
-                        {menu.children.map(function (
-                          menuLevel1Item,
-                          menuLevel1Index
-                        ) {
-                          if (menuLevel1Item.children) {
-                            return (
-                              <ListGroup.Item
-                                as="li"
-                                bsPrefix="nav-item"
-                                key={menuLevel1Index}
-                              >
-                                {/* first level menu started  */}
-                                <Accordion
-                                  defaultActiveKey="0"
-                                  className="navbar-nav flex-column"
+                        {menu.children.map(
+                          function (menuLevel1Item, menuLevel1Index) {
+                            if (menuLevel1Item.children) {
+                              return (
+                                <ListGroup.Item
+                                  as="li"
+                                  bsPrefix="nav-item"
+                                  key={menuLevel1Index}
                                 >
-                                  <CustomToggleLevel2 eventKey={0}>
-                                    {menuLevel1Item.title}
-                                    {menuLevel1Item.badge ? (
-                                      <Badge
-                                        className="ms-1"
-                                        bg={
-                                          menuLevel1Item.badgecolor
-                                            ? menuLevel1Item.badgecolor
-                                            : "primary"
-                                        }
-                                      >
-                                        {menuLevel1Item.badge}
-                                      </Badge>
-                                    ) : (
-                                      ""
-                                    )}
-                                  </CustomToggleLevel2>
-                                  <Accordion.Collapse
-                                    eventKey={0}
-                                    bsPrefix="nav-item"
+                                  {/* first level menu started  */}
+                                  <Accordion
+                                    defaultActiveKey="0"
+                                    className="navbar-nav flex-column"
                                   >
-                                    <ListGroup
-                                      as="ul"
-                                      bsPrefix=""
-                                      className="nav flex-column"
+                                    <CustomToggleLevel2 eventKey={0}>
+                                      {menuLevel1Item.title}
+                                      {menuLevel1Item.badge ? (
+                                        <Badge
+                                          className="ms-1"
+                                          bg={
+                                            menuLevel1Item.badgecolor
+                                              ? menuLevel1Item.badgecolor
+                                              : 'primary'
+                                          }
+                                        >
+                                          {menuLevel1Item.badge}
+                                        </Badge>
+                                      ) : (
+                                        ''
+                                      )}
+                                    </CustomToggleLevel2>
+                                    <Accordion.Collapse
+                                      eventKey={0}
+                                      bsPrefix="nav-item"
                                     >
-                                      {/* second level menu started  */}
-                                      {menuLevel1Item.children.map(function (
-                                        menuLevel2Item,
-                                        menuLevel2Index
-                                      ) {
-                                        if (menuLevel2Item.children) {
-                                          return (
-                                            <ListGroup.Item
-                                              as="li"
-                                              bsPrefix="nav-item"
-                                              key={menuLevel2Index}
-                                            >
-                                              {/* second level accordion menu started  */}
-                                              <Accordion
-                                                defaultActiveKey="0"
-                                                className="navbar-nav flex-column"
-                                              >
-                                                <CustomToggleLevel2
-                                                  eventKey={0}
+                                      <ListGroup
+                                        as="ul"
+                                        bsPrefix=""
+                                        className="nav flex-column"
+                                      >
+                                        {/* second level menu started  */}
+                                        {menuLevel1Item.children.map(
+                                          function (
+                                            menuLevel2Item,
+                                            menuLevel2Index,
+                                          ) {
+                                            if (menuLevel2Item.children) {
+                                              return (
+                                                <ListGroup.Item
+                                                  as="li"
+                                                  bsPrefix="nav-item"
+                                                  key={menuLevel2Index}
                                                 >
-                                                  {menuLevel2Item.title}
-                                                  {menuLevel2Item.badge ? (
-                                                    <Badge
-                                                      className="ms-1"
-                                                      bg={
-                                                        menuLevel2Item.badgecolor
-                                                          ? menuLevel2Item.badgecolor
-                                                          : "primary"
-                                                      }
+                                                  {/* second level accordion menu started  */}
+                                                  <Accordion
+                                                    defaultActiveKey="0"
+                                                    className="navbar-nav flex-column"
+                                                  >
+                                                    <CustomToggleLevel2
+                                                      eventKey={0}
                                                     >
-                                                      {menuLevel2Item.badge}
-                                                    </Badge>
-                                                  ) : (
-                                                    ""
-                                                  )}
-                                                </CustomToggleLevel2>
-                                                <Accordion.Collapse
-                                                  eventKey={0}
+                                                      {menuLevel2Item.title}
+                                                      {menuLevel2Item.badge ? (
+                                                        <Badge
+                                                          className="ms-1"
+                                                          bg={
+                                                            menuLevel2Item.badgecolor
+                                                              ? menuLevel2Item.badgecolor
+                                                              : 'primary'
+                                                          }
+                                                        >
+                                                          {menuLevel2Item.badge}
+                                                        </Badge>
+                                                      ) : (
+                                                        ''
+                                                      )}
+                                                    </CustomToggleLevel2>
+                                                    <Accordion.Collapse
+                                                      eventKey={0}
+                                                      bsPrefix="nav-item"
+                                                    >
+                                                      <ListGroup
+                                                        as="ul"
+                                                        bsPrefix=""
+                                                        className="nav flex-column"
+                                                      >
+                                                        {/* third level menu started  */}
+                                                        {menuLevel2Item.children.map(
+                                                          function (
+                                                            menuLevel3Item,
+                                                            menuLevel3Index,
+                                                          ) {
+                                                            return (
+                                                              <ListGroup.Item
+                                                                key={
+                                                                  menuLevel3Index
+                                                                }
+                                                                as="li"
+                                                                bsPrefix="nav-item"
+                                                              >
+                                                                {generateLink(
+                                                                  menuLevel3Item,
+                                                                )}
+                                                              </ListGroup.Item>
+                                                            );
+                                                          },
+                                                        )}
+                                                        {/* end of third level menu  */}
+                                                      </ListGroup>
+                                                    </Accordion.Collapse>
+                                                  </Accordion>
+                                                  {/* end of second level accordion */}
+                                                </ListGroup.Item>
+                                              );
+                                            } else {
+                                              return (
+                                                <ListGroup.Item
+                                                  key={menuLevel2Index}
+                                                  as="li"
                                                   bsPrefix="nav-item"
                                                 >
-                                                  <ListGroup
-                                                    as="ul"
-                                                    bsPrefix=""
-                                                    className="nav flex-column"
-                                                  >
-                                                    {/* third level menu started  */}
-                                                    {menuLevel2Item.children.map(
-                                                      function (
-                                                        menuLevel3Item,
-                                                        menuLevel3Index
-                                                      ) {
-                                                        return (
-                                                          <ListGroup.Item
-                                                            key={
-                                                              menuLevel3Index
-                                                            }
-                                                            as="li"
-                                                            bsPrefix="nav-item"
-                                                          >
-                                                            {generateLink(
-                                                              menuLevel3Item
-                                                            )}
-                                                          </ListGroup.Item>
-                                                        );
-                                                      }
-                                                    )}
-                                                    {/* end of third level menu  */}
-                                                  </ListGroup>
-                                                </Accordion.Collapse>
-                                              </Accordion>
-                                              {/* end of second level accordion */}
-                                            </ListGroup.Item>
-                                          );
-                                        } else {
-                                          return (
-                                            <ListGroup.Item
-                                              key={menuLevel2Index}
-                                              as="li"
-                                              bsPrefix="nav-item"
-                                            >
-                                              {generateLink(menuLevel2Item)}
-                                            </ListGroup.Item>
-                                          );
-                                        }
-                                      })}
-                                      {/* end of second level menu  */}
-                                    </ListGroup>
-                                  </Accordion.Collapse>
-                                </Accordion>
-                                {/* end of first level menu */}
-                              </ListGroup.Item>
-                            );
-                          } else {
-                            return (
-                              <ListGroup.Item
-                                as="li"
-                                bsPrefix="nav-item"
-                                key={menuLevel1Index}
-                              >
-                                {/* first level menu items */}
-                                {generateLink(menuLevel1Item)}
-                                {/* end of first level menu items */}
-                              </ListGroup.Item>
-                            );
-                          }
-                        })}
+                                                  {generateLink(menuLevel2Item)}
+                                                </ListGroup.Item>
+                                              );
+                                            }
+                                          },
+                                        )}
+                                        {/* end of second level menu  */}
+                                      </ListGroup>
+                                    </Accordion.Collapse>
+                                  </Accordion>
+                                  {/* end of first level menu */}
+                                </ListGroup.Item>
+                              );
+                            } else {
+                              return (
+                                <ListGroup.Item
+                                  as="li"
+                                  bsPrefix="nav-item"
+                                  key={menuLevel1Index}
+                                >
+                                  {/* first level menu items */}
+                                  {generateLink(menuLevel1Item)}
+                                  {/* end of first level menu items */}
+                                </ListGroup.Item>
+                              );
+                            }
+                          },
+                        )}
                       </ListGroup>
                     </Accordion.Collapse>
                     {/* end of main menu / menu level 1 / root items */}
@@ -307,10 +308,10 @@ const NavbarVertical = (props) => {
                     <Link
                       href={menu.link}
                       className={`nav-link ${
-                        location.pathname === menu.link ? "active" : ""
+                        location.pathname === menu.link ? 'active' : ''
                       }`}
                     >
-                      {typeof menu.icon === "string" ? (
+                      {typeof menu.icon === 'string' ? (
                         <i className={`nav-icon fe fe-${menu.icon} me-2`}></i>
                       ) : (
                         menu.icon
@@ -319,12 +320,12 @@ const NavbarVertical = (props) => {
                       {menu.badge ? (
                         <Badge
                           className="ms-1"
-                          bg={menu.badgecolor ? menu.badgecolor : "primary"}
+                          bg={menu.badgecolor ? menu.badgecolor : 'primary'}
                         >
                           {menu.badge}
                         </Badge>
                       ) : (
-                        ""
+                        ''
                       )}
                     </Link>
                     {/* end of menu item without any childern items */}

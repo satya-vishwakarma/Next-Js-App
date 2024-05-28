@@ -1,6 +1,6 @@
 // import node module libraries
-import Link from "next/link";
-import { Col, Row, Image } from "react-bootstrap";
+import Link from 'next/link';
+import { Col, Image, Row } from 'react-bootstrap';
 
 const ProfileHeader = () => {
   return (
@@ -8,25 +8,25 @@ const ProfileHeader = () => {
       <Col xl={12} lg={12} md={12} xs={12}>
         {/* Bg */}
         <div
-          className="pt-20 rounded-top"
+          className="rounded-top pt-20"
           style={{
-            background: "url(/images/background/profile-cover.jpg) no-repeat",
-            backgroundSize: "cover",
+            background: 'url(/images/background/profile-cover.jpg) no-repeat',
+            backgroundSize: 'cover',
           }}
         ></div>
-        <div className="bg-white rounded-bottom smooth-shadow-sm ">
-          <div className="d-flex align-items-center justify-content-between pt-4 pb-6 px-4">
+        <div className="rounded-bottom smooth-shadow-sm bg-white ">
+          <div className="d-flex align-items-center justify-content-between px-4 pb-6 pt-4">
             <div className="d-flex align-items-center">
               {/* avatar */}
-              <div className="avatar-xxl avatar-indicators avatar-online me-2 position-relative d-flex justify-content-end align-items-end mt-n10">
+              <div className="avatar-xxl avatar-indicators avatar-online position-relative d-flex justify-content-end align-items-end mt-n10 me-2">
                 <Image
                   src="/images/avatar/avatar-1.jpg"
-                  className="avatar-xxl rounded-circle border border-4 border-white-color-40"
+                  className="avatar-xxl rounded-circle border-white-color-40 border border-4"
                   alt=""
                 />
                 <Link
                   href="#!"
-                  className="position-absolute top-0 right-0 me-2"
+                  className="position-absolute right-0 top-0 me-2"
                   data-bs-toggle="tooltip"
                   data-placement="top"
                   title=""
@@ -53,7 +53,7 @@ const ProfileHeader = () => {
                     data-original-title="Beginner"
                   ></Link>
                 </h2>
-                <p className="mb-0 d-block">@imjituchauhan</p>
+                <p className="d-block mb-0">@imjituchauhan</p>
               </div>
             </div>
             <div>

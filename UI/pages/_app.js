@@ -3,15 +3,15 @@ import { Analytics } from '@vercel/analytics/react';
 import { NextSeo } from 'next-seo';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import SSRProvider from 'react-bootstrap/SSRProvider';
 
 import { SessionProvider } from 'next-auth/react';
+import SessionManager from './SessionManager';
 
 // import theme style scss file
-import 'styles/theme.scss';
+import './../styles/theme.scss';
 
 // import default layouts
-import DefaultDashboardLayout from 'layouts/DefaultDashboardLayout';
+import DefaultDashboardLayout from '@/layouts/DefaultDashboardLayout';
 import { Provider } from 'react-redux';
 import { store } from './../redux/store';
 
@@ -34,46 +34,33 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         : DefaultDashboardLayout
       : DefaultDashboardLayout);
 
-  console.log(session, 'session');
+  console.log(session, 'session', Component.auth);
   return (
     <SessionProvider session={session} refetchOnWindowFocus>
       <Provider store={store}>
-        <SSRProvider>
-          <Head>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1"
-            />
-            <meta name="keywords" content={keywords} />
-            <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-          </Head>
-          <NextSeo
-            title={title}
-            description={description}
-            canonical={pageURL}
-            openGraph={{
-              url: pageURL,
-              title: title,
-              description: description,
-              site_name: process.env.siteName,
-            }}
-          />
-          <Layout>
-            {Component.auth ? (
-              <Auth>
-                {/*   <SessionManager> */}
-                <Component {...pageProps} />
-                {/* </SessionManager> */}
-              </Auth>
-            ) : (
-              /*   <SessionManager> */
-              <Component {...pageProps}></Component>
-              /*  </SessionManager> */
-            )}
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="keywords" content={keywords} />
+          <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        </Head>
+        <NextSeo
+          title={title}
+          description={description}
+          canonical={pageURL}
+          openGraph={{
+            url: pageURL,
+            title: title,
+            description: description,
+            site_name: process.env.siteName,
+          }}
+        />
+        <Layout>
+          <SessionManager>
+            <Component {...pageProps} />
+          </SessionManager>
 
-            <Analytics />
-          </Layout>
-        </SSRProvider>
+          <Analytics />
+        </Layout>
       </Provider>
     </SessionProvider>
   );

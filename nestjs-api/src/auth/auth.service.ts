@@ -18,16 +18,20 @@ export class AuthService {
         status: STATUS.ACTIVE,
       });
 
-      console.log(users, '-----');
-
-      const { password, username: userName, _id, role, email, status } = users;
+      console.log(users, '---------');
+      const {
+        password = null,
+        username: userName = null,
+        _id = null,
+        role = null,
+        email = null,
+        status = null,
+      } = users || {};
 
       const validatePassword = await this.usersService.comparePassword({
         requestPassword: pass,
         hashPassword: password,
       });
-
-      console.log(validatePassword, '----------validatePassword');
 
       if (!validatePassword) {
         throw new UnauthorizedException();
@@ -38,6 +42,7 @@ export class AuthService {
         role,
         email,
         status,
+        _id,
         access_token: await this.jwtService.signAsync(payload, {
           secret: jwtConstants.secret,
         }),

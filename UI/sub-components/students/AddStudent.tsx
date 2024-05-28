@@ -4,29 +4,46 @@ import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 
 import { AddStudentSchema } from '../../validation';
 
-import { useEffect } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getUser } from '../../redux/slices/usersSlices';
+import { Toaster } from 'react-hot-toast';
 
-const initialValues = {
+import 'bootstrap-daterangepicker/daterangepicker.css';
+import FormData from 'form-data';
+import moment from 'moment';
+import DateRangePicker from 'react-bootstrap-daterangepicker';
+
+import { DropFiles } from './../../widgets';
+
+let data: any = new FormData();
+
+interface InitialValues {
+  firstName: string;
+  lastName: string;
+  fatherName: string;
+  motherName: string;
+  class: string;
+  gender: string;
+  dob: string;
+}
+
+const initialValues: InitialValues = {
   firstName: '',
   lastName: '',
   fatherName: '',
   motherName: '',
   class: '',
+  gender: '',
+  dob: '',
 };
 
 const AddStudent = () => {
-  const dispatch = useAppDispatch();
+  const addStudent = async (formData: InitialValues) => {
+    console.log(formData);
+    for (const [key, value] of Object.entries(formData)) {
+      data.append(key, value);
+    }
 
-  const user = useAppSelector((state) => state.users.data);
-
-  useEffect(() => {
-    dispatch(getUser());
-  }, []);
-
-  console.log(user);
+    // const response = await axiosInstance.post('students', data);
+  };
 
   const classList = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -57,12 +74,14 @@ const AddStudent = () => {
               initialValues={initialValues}
               validationSchema={AddStudentSchema}
               onSubmit={(values: any, { setSubmitting, resetForm }) => {
-                setTimeout(() => {
+                addStudent(values);
+                /*    setTimeout(() => {
+                  addStudent();
                   // dispatch(addStudentRed(values));
                   toast.success('Student save successfully.');
                   setSubmitting(false);
                   resetForm();
-                }, 400);
+                }, 400); */
               }}
             >
               {({
@@ -73,9 +92,11 @@ const AddStudent = () => {
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
+                setFieldValue,
               }) => (
                 <Form onSubmit={handleSubmit}>
                   {/* New email */}
+
                   <Row className="mb-3">
                     <Form.Label className="col-sm-4" htmlFor="newEmailAddress">
                       First Name
@@ -173,11 +194,96 @@ const AddStudent = () => {
                       </Form.Select>
                       <ErrorMessage name="class" component="div" />
                     </Col>
+                  </Row>
+
+                  <Row className="mb-3">
+                    <Form.Label className="col-md-4" htmlFor="default">
+                      Gender
+                    </Form.Label>
+                    <Col md={8} xs={12}>
+                      <Form.Check
+                        id="customRadioInline1"
+                        className="form-check-inline"
+                      >
+                        <Form.Check.Input
+                          type="radio"
+                          id="male"
+                          value="male"
+                          checked={values.gender === 'male'}
+                          onChange={handleChange}
+                          name="gender"
+                        />
+                        <Form.Check.Label>Male</Form.Check.Label>
+                      </Form.Check>
+                      <Form.Check
+                        id="customRadioInline2"
+                        className="form-check-inline"
+                      >
+                        <Form.Check.Input
+                          id="female"
+                          value="female"
+                          checked={values.gender === 'female'}
+                          type="radio"
+                          onChange={handleChange}
+                          name="gender"
+                        />
+                        <Form.Check.Label>Female</Form.Check.Label>
+                        <ErrorMessage name="gender" component="div" />
+                      </Form.Check>
+                    </Col>
+                  </Row>
+
+                  <Row className="mb-3">
+                    <Form.Label className="col-sm-4" htmlFor="DOB">
+                      DOB
+                    </Form.Label>
+                    <Col md={8} xs={12}>
+                      <DateRangePicker
+                        initialSettings={{
+                          singleDatePicker: true,
+                          showDropdowns: true,
+                          startDate: moment(),
+                        }}
+                        onCallback={(start) => {
+                          setFieldValue(
+                            'dob',
+                            moment(start).format('YYYY-MM-DD'),
+                          );
+                        }}
+                      >
+                        <input
+                          type="text"
+                          name="dob"
+                          className="form-control col-4"
+                          id="dob"
+                          onChange={handleChange}
+                          value={values.dob}
+                        />
+                      </DateRangePicker>
+                      <ErrorMessage name="class" component="div" />
+                    </Col>
+                  </Row>
+
+                  <Row className="mb-4">
+                    <Form.Label className="col-md-4" htmlFor="default">
+                      Profile photo
+                    </Form.Label>
+
+                    <Col md={8} xs={12}>
+                      <div className="dropzone mb-3 border-dashed py-10">
+                        <DropFiles />
+                      </div>
+
+                      <Button variant="outline-white" type="submit">
+                        Change
+                      </Button>
+                    </Col>
+
                     <Col md={{ offset: 4, span: 8 }} xs={12} className="mt-4">
                       <Button
                         variant="primary"
                         type="submit"
-                        disabled={isSubmitting}
+                        //  disabled={isSubmitting}
                       >
                         Save Changes
                       </Button>

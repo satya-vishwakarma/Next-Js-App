@@ -1,11 +1,13 @@
 // import node module libraries
-import axios from 'axios';
 import { ErrorMessage, Formik } from 'formik';
+import { signIn } from 'next-auth/react';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-bootstrap-icons';
 import toast, { Toaster } from 'react-hot-toast';
 import AuthLayout from '../../layouts/AuthLayout';
 import { SignInSchema } from '../../validation';
+
+import { useRouter } from 'next/router';
 
 // import authlayout to override default layout
 
@@ -15,6 +17,7 @@ const initialValues = {
 };
 
 const SignIn = () => {
+  const router = useRouter();
   return (
     <Row className="align-items-center justify-content-center g-0 min-vh-100">
       <Col xxl={4} lg={6} md={8} xs={12} className="py-xl-0 py-8">
@@ -40,21 +43,27 @@ const SignIn = () => {
               validationSchema={SignInSchema}
               onSubmit={async (values: any, { setSubmitting, resetForm }) => {
                 try {
-                  const response = await axios.post(
-                    'http://localhost:8001/api/auth/login',
-                    {
-                      username: 'testadmin@gmail.com',
-                      password: 'Test@123',
-                    },
-                  );
+                  const response = await signIn('credentials', {
+                    redirect: false,
+                    username: 'test',
+                    password: 'Test@123',
+                  });
 
-                  console.log(response);
+                  console.log(response?.error, 'response');
 
-                  setTimeout(() => {
-                    toast.success('Student save successfully.');
-                    setSubmitting(false);
-                    resetForm();
-                  }, 400);
+                  if (response?.status == 200) {
+                    setTimeout(() => {
+                      toast.success('Login successfully.');
+                      setSubmitting(false);
+                      router.push('/');
+                      resetForm();
+                    }, 400);
+                  } else if (
+                    response?.error !== null &&
+                    response?.status === 401
+                  ) {
+                    toast.error(response?.error);
+                  }
                 } catch (error: any) {
                   toast.error(error.response.data.message);
                 }

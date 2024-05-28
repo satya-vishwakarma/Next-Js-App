@@ -1,24 +1,24 @@
 // import node module libraries
-import { Col, Row, Form, Card, Button, Image } from "react-bootstrap";
+import { Button, Card, Col, Form, Image, Row } from 'react-bootstrap';
 
 // import widget as custom components
-import { FormSelect, DropFiles } from "widgets";
+import { DropFiles, FormSelect } from 'widgets';
 
 const GeneralSetting = () => {
   const countryOptions = [
-    { value: "India", label: "India" },
-    { value: "US", label: "US" },
-    { value: "UK", label: "UK" },
-    { value: "UAE", label: "UAE" },
+    { value: 'India', label: 'India' },
+    { value: 'US', label: 'US' },
+    { value: 'UK', label: 'UK' },
+    { value: 'UAE', label: 'UAE' },
   ];
 
   return (
     <Row className="mb-8">
       <Col xl={3} lg={4} md={12} xs={12}>
-        <div className="mb-4 mb-lg-0">
+        <div className="mb-lg-0 mb-4">
           <h4 className="mb-1">General Setting</h4>
-          <p className="mb-0 fs-5 text-muted">
-            Profile configuration settings{" "}
+          <p className="fs-5 text-muted mb-0">
+            Profile configuration settings{' '}
           </p>
         </div>
       </Col>
@@ -30,7 +30,7 @@ const GeneralSetting = () => {
               <h4 className="mb-1">General Settings</h4>
             </div>
             <Row className="align-items-center mb-8">
-              <Col md={3} className="mb-3 mb-md-0">
+              <Col md={3} className="mb-md-0 mb-3">
                 <h5 className="mb-0">Avatar</h5>
               </Col>
               <Col md={9}>
@@ -48,10 +48,10 @@ const GeneralSetting = () => {
                       className="me-2"
                       type="submit"
                     >
-                      Change{" "}
+                      Change{' '}
                     </Button>
                     <Button variant="outline-white" type="submit">
-                      Remove{" "}
+                      Remove{' '}
                     </Button>
                   </div>
                 </div>
@@ -59,7 +59,7 @@ const GeneralSetting = () => {
             </Row>
             {/* col */}
             <Row className="mb-8">
-              <Col md={3} className="mb-3 mb-md-0">
+              <Col md={3} className="mb-md-0 mb-3">
                 {/* heading */}
                 <h5 className="mb-0">Cover photo</h5>
               </Col>
@@ -68,12 +68,12 @@ const GeneralSetting = () => {
                 <div>
                   <Form
                     action="#"
-                    className="dropzone mb-3 py-10 border-dashed"
+                    className="dropzone mb-3 border-dashed py-10"
                   >
                     <DropFiles />
                   </Form>
                   <Button variant="outline-white" type="submit">
-                    Change{" "}
+                    Change{' '}
                   </Button>
                 </div>
               </Col>
@@ -93,7 +93,7 @@ const GeneralSetting = () => {
                   >
                     Full name
                   </label>
-                  <div className="col-sm-4 mb-3 mb-lg-0">
+                  <div className="col-sm-4 mb-lg-0 mb-3">
                     <input
                       type="text"
                       className="form-control"
@@ -194,7 +194,7 @@ const GeneralSetting = () => {
                 <Row className="align-items-center">
                   <Form.Label className="col-sm-4" htmlFor="zipcode">
                     Zip code
-                    <i className="fe fe-info fs-4 me-2 text-muted icon-xs"></i>
+                    <i className="fe fe-info fs-4 text-muted icon-xs me-2"></i>
                   </Form.Label>
 
                   <Col md={8} xs={12}>
