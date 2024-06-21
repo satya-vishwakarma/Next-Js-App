@@ -1,29 +1,29 @@
 // import node module libraries
-import { Fragment, useState } from "react";
+import { useState } from 'react';
 import {
-  Col,
-  Row,
   Card,
   Carousel,
+  Col,
+  Container,
   Image,
   Nav,
+  Row,
   Tab,
-  Container,
-} from "react-bootstrap";
+} from 'react-bootstrap';
 
 // import widget/custom components
-import { HighlightCode } from "widgets";
+import { HighlightCode } from 'widgets';
 
 // import react code data file
 import {
+  CrossfadeCode,
+  DarkVariantCode,
+  IndividualCode,
   SlidesOnlyCode,
+  WithCaptionCode,
   WithControlCode,
   WithIndicatorsCode,
-  WithCaptionCode,
-  CrossfadeCode,
-  IndividualCode,
-  DarkVariantCode,
-} from "data/code/CarouselsCode";
+} from '@/data/code/CarouselsCode';
 
 const Carousels = () => {
   const [index, setIndex] = useState(0);
@@ -36,9 +36,9 @@ const Carousels = () => {
     <Container fluid className="p-6">
       <Row>
         <Col lg={12} md={12} sm={12}>
-          <div className="border-bottom pb-4 mb-4 d-md-flex align-items-center justify-content-between">
-            <div className="mb-3 mb-md-0">
-              <h1 className="mb-1 h2 fw-bold">Carousel</h1>
+          <div className="border-bottom d-md-flex align-items-center justify-content-between mb-4 pb-4">
+            <div className="mb-md-0 mb-3">
+              <h1 className="h2 fw-bold mb-1">Carousel</h1>
               <p className="mb-0 ">
                 A slideshow component for cycling through elements—images or
                 slides of text—like a carousel.
@@ -54,8 +54,8 @@ const Carousels = () => {
           <div id="slide" className="mb-4">
             <h3>Slides only</h3>
             <p>
-              Here’s a carousel with slides only. Note the presence of the{" "}
-              <code className="highlighter-rouge">.d-block</code> and{" "}
+              Here’s a carousel with slides only. Note the presence of the{' '}
+              <code className="highlighter-rouge">.d-block</code> and{' '}
               <code className="highlighter-rouge">.w-100</code> on carousel
               images to prevent browser default image alignment.
             </p>
@@ -79,7 +79,7 @@ const Carousels = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <Carousel controls={false} indicators={false}>
                       <Carousel.Item>
@@ -106,7 +106,7 @@ const Carousels = () => {
                     </Carousel>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={SlidesOnlyCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -144,7 +144,7 @@ const Carousels = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <Carousel indicators={false}>
                       <Carousel.Item>
@@ -171,7 +171,7 @@ const Carousels = () => {
                     </Carousel>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={WithControlCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -212,7 +212,7 @@ const Carousels = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <Carousel indicators>
                       <Carousel.Item>
@@ -239,7 +239,7 @@ const Carousels = () => {
                     </Carousel>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={WithIndicatorsCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -258,8 +258,8 @@ const Carousels = () => {
           <div id="with-caption" className="mb-4">
             <h3>With caption</h3>
             <p>
-              Add captions to your slides easily with the{" "}
-              <code>&lt;Carousel.Caption&gt;</code> within any{" "}
+              Add captions to your slides easily with the{' '}
+              <code>&lt;Carousel.Caption&gt;</code> within any{' '}
               <code>&lt;Carousel.Item&gt;</code>.
             </p>
           </div>
@@ -281,7 +281,7 @@ const Carousels = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <Carousel activeIndex={index} onSelect={handleSelect}>
                       <Carousel.Item>
@@ -330,7 +330,7 @@ const Carousels = () => {
                     {/* end of code */}
                   </Tab.Pane>
 
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={WithCaptionCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -371,7 +371,7 @@ const Carousels = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <Carousel fade indicators={false}>
                       <Carousel.Item>
@@ -398,7 +398,7 @@ const Carousels = () => {
                     </Carousel>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={CrossfadeCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -439,7 +439,7 @@ const Carousels = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <Carousel indicators={false}>
                       <Carousel.Item interval={1000}>
@@ -466,7 +466,7 @@ const Carousels = () => {
                     </Carousel>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={IndividualCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -485,7 +485,7 @@ const Carousels = () => {
           <div id="dark-variant" className="mb-4">
             <h3>Dark Variant</h3>
             <p>
-              Add <code>variant=&#34;dark&#34;</code> to the{" "}
+              Add <code>variant=&#34;dark&#34;</code> to the{' '}
               <code>Carousel</code> for darker controls, indicators, and
               captions.
             </p>
@@ -508,7 +508,7 @@ const Carousels = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <Carousel variant="dark">
                       <Carousel.Item>
@@ -556,7 +556,7 @@ const Carousels = () => {
                     </Carousel>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={DarkVariantCode} />
                   </Tab.Pane>
                 </Tab.Content>

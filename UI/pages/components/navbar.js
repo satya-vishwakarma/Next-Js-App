@@ -1,35 +1,34 @@
 // import node module libraries
-import { Fragment } from "react";
 import {
-  Col,
-  Row,
   Card,
-  Navbar,
-  NavDropdown,
-  Nav,
-  Image,
-  Tab,
+  Col,
   Container,
-} from "react-bootstrap";
+  Image,
+  Nav,
+  NavDropdown,
+  Navbar,
+  Row,
+  Tab,
+} from 'react-bootstrap';
 
 // import widget/custom components
-import { HighlightCode } from "widgets";
+import { HighlightCode } from 'widgets';
 
 // import data files
 import {
-  DefaultNavbar,
   BrandNavbar,
   ColorSchemesCode,
-} from "data/code/NavbarsCode";
+  DefaultNavbar,
+} from '@/data/code/NavbarsCode';
 
 const Navbars = () => {
   return (
     <Container fluid className="p-6">
       <Row>
         <Col lg={12} md={12} sm={12}>
-          <div className="border-bottom pb-4 mb-4 d-md-flex align-items-center justify-content-between">
-            <div className="mb-3 mb-md-0">
-              <h1 className="mb-1 h2 fw-bold">Navbar</h1>
+          <div className="border-bottom d-md-flex align-items-center justify-content-between mb-4 pb-4">
+            <div className="mb-md-0 mb-3">
+              <h1 className="h2 fw-bold mb-1">Navbar</h1>
               <p className="mb-0 ">
                 A powerful, responsive navigation header, the navbar. Includes
                 support for branding, navigation, and more.
@@ -63,7 +62,7 @@ const Navbars = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="all" className="pb-4 p-4">
+                  <Tab.Pane eventKey="all" className="p-4 pb-4">
                     <Navbar expand="lg">
                       <Navbar.Brand href="#home">
                         <Image
@@ -99,7 +98,7 @@ const Navbars = () => {
                       </Navbar.Collapse>
                     </Navbar>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="approved" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="approved" className="react-code p-4 pb-4">
                     <HighlightCode code={DefaultNavbar} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -137,7 +136,7 @@ const Navbars = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="all" className="pb-4 p-4">
+                  <Tab.Pane eventKey="all" className="p-4 pb-4">
                     <Navbar>
                       <Navbar.Brand href="#home">
                         <Image
@@ -150,7 +149,7 @@ const Navbars = () => {
                       </Navbar.Brand>
                     </Navbar>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="approved" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="approved" className="react-code p-4 pb-4">
                     <HighlightCode code={BrandNavbar} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -170,7 +169,7 @@ const Navbars = () => {
             <h3>Color schemes</h3>
             <p>
               Theming the navbar has never been easier thanks to the combination
-              of theming classes and background-color utilities. Choose from{" "}
+              of theming classes and background-color utilities. Choose from{' '}
               <code>variant=&#34;light&#34;</code> for use with light background
               colors, or <code>variant=&#34;dark&#34;</code> for dark background
               colors. Then, customize with the <code>bg</code> prop or any
@@ -195,7 +194,7 @@ const Navbars = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="all" className="pb-4 p-4">
+                  <Tab.Pane eventKey="all" className="p-4 pb-4">
                     <Navbar bg="dark" variant="dark">
                       <Navbar.Brand href="#home">
                         <Image
@@ -214,7 +213,7 @@ const Navbars = () => {
                     <Navbar bg="primary" variant="dark">
                       <Container>
                         <Navbar.Brand href="#home">
-                          {" "}
+                          {' '}
                           <Image
                             src="/images/brand/logo/logo.svg"
                             alt=""
@@ -246,7 +245,7 @@ const Navbars = () => {
                       </Container>
                     </Navbar>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="approved" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="approved" className="react-code p-4 pb-4">
                     <HighlightCode code={ColorSchemesCode} />
                   </Tab.Pane>
                 </Tab.Content>

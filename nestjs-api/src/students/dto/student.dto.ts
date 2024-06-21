@@ -1,5 +1,5 @@
 import { GENDER } from '@app/common/enums';
-import { IsNotEmpty } from 'class-validator';
+import { IsIn, IsNotEmpty } from 'class-validator';
 
 export class StudentDto {
   @IsNotEmpty()
@@ -25,4 +25,9 @@ export class StudentDto {
 
   @IsNotEmpty()
   email: string;
+}
+
+export class updateStatusDto {
+  @IsIn([1, 2])
+  status: number;
 }

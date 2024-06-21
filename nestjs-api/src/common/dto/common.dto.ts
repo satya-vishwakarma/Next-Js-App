@@ -8,3 +8,7 @@ export interface requestBodyDto {
     _id: Schema.Types.ObjectId;
   };
 }
+
+export interface objectIdDto {
+  _id: Schema.Types.ObjectId;
+}

@@ -1,8 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
+  Put,
   Req,
   UploadedFile,
   UseInterceptors,
@@ -12,8 +15,9 @@ import { StudentsService } from './students.service';
 
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { StudentDto } from './dto/student.dto';
+import { StudentDto, updateStatusDto } from './dto/student.dto';
 
+import { objectIdDto } from '@app/common/dto/index.dto';
 import { Request as ExpressRequest } from 'express';
 
 // 2. Configure Multer
@@ -36,7 +40,7 @@ export class StudentsController {
   @UseInterceptors(FileInterceptor('image', { storage }))
   createStudent(
     @Req() request: ExpressRequest,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File | any,
     @Body() body: StudentDto,
   ) {
     return this.studentService.createStudent({ body, files: file }, request);
@@ -45,5 +49,24 @@ export class StudentsController {
   @Get()
   getAllStudent() {
     return this.studentService.getAllStudent();
+  }
+
+  @Get(':id')
+  getStudentInfo(@Param('id') id: objectIdDto) {
+    return this.studentService.getStudentInfo(id);
+  }
+
+  @Delete(':id')
+  deleteStudent(@Param('id') id: string, @Req() request: ExpressRequest) {
+    return this.studentService.deleteStudent(id, request);
+  }
+
+  @Put(':id')
+  updateStudentStatus(
+    @Param('id') id: objectIdDto,
+    @Req() request: ExpressRequest,
+    @Body() body: updateStatusDto,
+  ) {
+    return this.studentService.updateStudent(id, request, body);
   }
 }

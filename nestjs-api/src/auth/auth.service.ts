@@ -45,7 +45,7 @@ export class AuthService {
         _id,
         access_token: await this.jwtService.signAsync(payload, {
           secret: jwtConstants.secret,
-          expiresIn: '0.30h',
+          expiresIn: '3.30h',
         }),
       };
     } catch (error) {

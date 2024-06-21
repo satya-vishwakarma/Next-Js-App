@@ -16,6 +16,9 @@ export class StudentModel extends BaseModel {
   getStudentWithAgg() {
     return this.studentModel.aggregate([
       {
+        $match: { status: { $ne: 0 } },
+      },
+      {
         $lookup: {
           from: 'users',
           localField: 'userId',
@@ -24,7 +27,7 @@ export class StudentModel extends BaseModel {
           pipeline: [
             {
               $project: {
-                profileImage: 1,
+                'profileImage.profile': 1,
                 status: 1,
               },
             },
@@ -65,7 +68,20 @@ export class StudentModel extends BaseModel {
 
       {
         $project: {
-          __v: 0,
+          profileImage: '$users.profileImage.profile',
+          firstName: 1,
+          lastName: 1,
+          fatherName: 1,
+          motherName: 1,
+          class: 1,
+          status: 1,
+          dob: 1,
+          gender: 1,
+          createdBy: 1,
+          userId: 1,
+          createdAt: 1,
+          updatedAt: 1,
+          statusLabel: 1,
         },
       },
     ]);

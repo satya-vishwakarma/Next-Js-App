@@ -9,6 +9,7 @@ import {
 } from 'class-validator';
 
 import { ERRORMESSAGE } from '@app/common/constants';
+import { fileInterFace } from '@app/common/interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 
 const { PASSOWRDVALIDATION } = ERRORMESSAGE;
@@ -40,7 +41,7 @@ export class UserDto {
 
   @IsOptional()
   @IsString()
-  profileImage?: string;
+  profileImage?: fileInterFace;
 
   @IsOptional()
   createdAt?: Date;

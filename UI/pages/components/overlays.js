@@ -1,28 +1,28 @@
 // import node module libraries
-import { Fragment, useState, useRef } from "react";
+import { useRef, useState } from 'react';
 import {
-  Col,
-  Row,
+  Button,
   Card,
+  Col,
+  Container,
+  Image,
+  Nav,
   Overlay,
   OverlayTrigger,
-  Button,
-  Tooltip,
-  Nav,
+  Row,
   Tab,
-  Image,
-  Container,
-} from "react-bootstrap";
+  Tooltip,
+} from 'react-bootstrap';
 
 // import widget/custom components
-import { HighlightCode } from "widgets";
+import { HighlightCode } from 'widgets';
 
 // import react code data file
 import {
   OverlayBasicCode,
   OverlayTriggerCode,
   TriggerBehaviorCode,
-} from "data/code/OverlaysCode";
+} from '@/data/code/OverlaysCode';
 
 const Overlays = () => {
   const [show, setShow] = useState(false);
@@ -36,9 +36,9 @@ const Overlays = () => {
     <Container fluid className="p-6">
       <Row>
         <Col lg={12} md={12} sm={12}>
-          <div className="border-bottom pb-4 mb-4 d-md-flex align-items-center justify-content-between">
-            <div className="mb-3 mb-md-0">
-              <h1 className="mb-1 h2 fw-bold">Overlays</h1>
+          <div className="border-bottom d-md-flex align-items-center justify-content-between mb-4 pb-4">
+            <div className="mb-md-0 mb-3">
+              <h1 className="h2 fw-bold mb-1">Overlays</h1>
               <p className="mb-0 ">
                 Overlay is the fundamental component for positioning and
                 controlling tooltip visibility. It&apos;s a wrapper around
@@ -81,7 +81,7 @@ const Overlays = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="all" className="pb-4 p-4">
+                  <Tab.Pane eventKey="all" className="p-4 pb-4">
                     {/* basic offcanvas code started */}
                     <Button
                       variant="primary"
@@ -105,10 +105,10 @@ const Overlays = () => {
                         <div
                           {...props}
                           style={{
-                            position: "absolute",
-                            backgroundColor: "rgba(117, 79, 254, 0.50)",
-                            padding: "2px 10px",
-                            color: "white",
+                            position: 'absolute',
+                            backgroundColor: 'rgba(117, 79, 254, 0.50)',
+                            padding: '2px 10px',
+                            color: 'white',
                             borderRadius: 3,
                             ...props.style,
                           }}
@@ -119,7 +119,7 @@ const Overlays = () => {
                     </Overlay>
                     {/* end of basic offcanvas code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="approved" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="approved" className="react-code p-4 pb-4">
                     <HighlightCode code={OverlayBasicCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -163,7 +163,7 @@ const Overlays = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="all" className="pb-4 p-4">
+                  <Tab.Pane eventKey="all" className="p-4 pb-4">
                     {/* basic offcanvas code started */}
                     <OverlayTrigger
                       placement="right"
@@ -174,7 +174,7 @@ const Overlays = () => {
                     </OverlayTrigger>
                     {/* end of basic offcanvas code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="approved" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="approved" className="react-code p-4 pb-4">
                     <HighlightCode code={OverlayTriggerCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -193,8 +193,8 @@ const Overlays = () => {
           <div id="trigger-behavior" className="mb-4">
             <h3>Customizing trigger behavior</h3>
             <p>
-              For more advanced behaviors <code>&lt;OverlayTrigger&gt;</code>{" "}
-              accepts a function child that passes in the injected{" "}
+              For more advanced behaviors <code>&lt;OverlayTrigger&gt;</code>{' '}
+              accepts a function child that passes in the injected{' '}
               <code>ref</code> and event handlers that correspond to the
               configured <code>trigger</code> prop.
             </p>
@@ -217,7 +217,7 @@ const Overlays = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="all" className="pb-4 p-4">
+                  <Tab.Pane eventKey="all" className="p-4 pb-4">
                     {/* trigger behavior code started */}
                     <OverlayTrigger
                       placement="bottom"
@@ -246,7 +246,7 @@ const Overlays = () => {
                     </OverlayTrigger>
                     {/* end of trigger behavior code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="approved" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="approved" className="react-code p-4 pb-4">
                     <HighlightCode code={TriggerBehaviorCode} />
                   </Tab.Pane>
                 </Tab.Content>

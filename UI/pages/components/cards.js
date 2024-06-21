@@ -1,44 +1,43 @@
 // import node module libraries
-import { Fragment } from "react";
 import {
-  Col,
-  Row,
-  Card,
   Button,
+  Card,
+  Col,
+  Container,
   ListGroup,
   ListGroupItem,
   Nav,
+  Row,
   Tab,
-  Container,
-} from "react-bootstrap";
+} from 'react-bootstrap';
 
 // import widget/custom components
-import { HighlightCode } from "widgets";
+import { HighlightCode } from 'widgets';
 
 // import react code data file
 import {
   BasicCardCode,
   CardBodyCode,
-  TitlesTextLinksCode,
-  ListGroups1Code,
-  ListGroups2Code,
   CardImagesCode,
-  KitchenSinkCode,
   HeaderFooterCode,
   HeaderFooterCode2,
-  TextAlignmentCode,
-  ImagesTopBottomCode,
   ImageOverlaysCode,
-} from "data/code/CardsCode";
+  ImagesTopBottomCode,
+  KitchenSinkCode,
+  ListGroups1Code,
+  ListGroups2Code,
+  TextAlignmentCode,
+  TitlesTextLinksCode,
+} from '@/data/code/CardsCode';
 
 const Cards = () => {
   return (
     <Container fluid className="p-6">
       <Row>
         <Col lg={12} md={12} sm={12}>
-          <div className="border-bottom pb-4 mb-4 d-md-flex align-items-center justify-content-between">
-            <div className="mb-3 mb-md-0">
-              <h1 className="mb-1 h2 fw-bold">Cards</h1>
+          <div className="border-bottom d-md-flex align-items-center justify-content-between mb-4 pb-4">
+            <div className="mb-md-0 mb-3">
+              <h1 className="h2 fw-bold mb-1">Cards</h1>
               <p className="mb-0 ">
                 Geek&apos;s cards provide a flexible and extensible content
                 container with multiple variants and options.
@@ -76,8 +75,8 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
-                    <Card style={{ width: "18rem" }}>
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
+                    <Card style={{ width: '18rem' }}>
                       <Card.Img
                         variant="top"
                         src="/images/placeholder/placeholder-4by3.svg"
@@ -92,7 +91,7 @@ const Cards = () => {
                       </Card.Body>
                     </Card>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={BasicCardCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -112,7 +111,7 @@ const Cards = () => {
             <div className="mt-3" id="body">
               <h3>Card Body</h3>
               <p>
-                Use <code>&lt;Card.Body&gt;</code> to pad content inside a{" "}
+                Use <code>&lt;Card.Body&gt;</code> to pad content inside a{' '}
                 <code>&lt;Card&gt;</code>.
               </p>
             </div>
@@ -135,14 +134,14 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     <Card>
                       <Card.Body>
                         This is some text within a card body.
                       </Card.Body>
                     </Card>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={CardBodyCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -161,17 +160,17 @@ const Cards = () => {
           <div id="titles-text-links" className="mb-4">
             <h3>Titles, text, and links</h3>
             <p>
-              Using <code>&lt;Card.Title&gt;</code>,{" "}
-              <code>&lt;Card.Subtitle&gt;</code>, and{" "}
-              <code>&lt;Card.Text&gt;</code> inside the{" "}
-              <code>&lt;Card.Body&gt;</code> will line them up nicely.{" "}
+              Using <code>&lt;Card.Title&gt;</code>,{' '}
+              <code>&lt;Card.Subtitle&gt;</code>, and{' '}
+              <code>&lt;Card.Text&gt;</code> inside the{' '}
+              <code>&lt;Card.Body&gt;</code> will line them up nicely.{' '}
               <code>&lt;Card.Link&gt;</code>s are used to line up links next to
               each other.
             </p>
             <p>
-              {" "}
+              {' '}
               <code>&lt;Card.Text&gt;</code> outputs <code>&lt;p&gt;</code> tags
-              around the content, so you can use multiple{" "}
+              around the content, so you can use multiple{' '}
               <code>&lt;Card.Text&gt;</code>s to create separate paragraphs.
             </p>
           </div>
@@ -193,12 +192,12 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* Code started */}
-                    <Card style={{ width: "18rem" }}>
+                    <Card style={{ width: '18rem' }}>
                       <Card.Body>
                         <Card.Title>Card Title</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">
+                        <Card.Subtitle className="text-muted mb-2">
                           Card Subtitle
                         </Card.Subtitle>
                         <Card.Text>
@@ -211,7 +210,7 @@ const Cards = () => {
                     </Card>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={TitlesTextLinksCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -249,9 +248,9 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* Code started */}
-                    <Card style={{ width: "18rem" }}>
+                    <Card style={{ width: '18rem' }}>
                       <ListGroup variant="flush">
                         <ListGroup.Item>Cras justo odio</ListGroup.Item>
                         <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
@@ -260,7 +259,7 @@ const Cards = () => {
                     </Card>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={ListGroups1Code} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -288,8 +287,8 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
-                    <Card style={{ width: "18rem" }}>
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
+                    <Card style={{ width: '18rem' }}>
                       <Card.Header>Featured</Card.Header>
                       <ListGroup variant="flush">
                         <ListGroup.Item>Cras justo odio</ListGroup.Item>
@@ -298,7 +297,7 @@ const Cards = () => {
                       </ListGroup>
                     </Card>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={ListGroups2Code} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -317,7 +316,7 @@ const Cards = () => {
           <div id="image" className="mb-4">
             <h3>Images</h3>
             <p>
-              <code>&lt;Card.Img&gt;</code> with{" "}
+              <code>&lt;Card.Img&gt;</code> with{' '}
               <code>variant=&#34;top&#34;</code> places an image to the top of
               the card. With <code>&lt;Card.Text&gt;</code>, text can be added
               to the card. Text within <code>&lt;Card.Text&gt;</code> can also
@@ -342,8 +341,8 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
-                    <Card style={{ width: "18rem" }}>
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
+                    <Card style={{ width: '18rem' }}>
                       <Card.Img
                         variant="top"
                         src="/images/placeholder/placeholder-4by3.svg"
@@ -356,7 +355,7 @@ const Cards = () => {
                       </Card.Body>
                     </Card>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={CardImagesCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -399,8 +398,8 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
-                    <Card style={{ width: "18rem" }}>
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
+                    <Card style={{ width: '18rem' }}>
                       <Card.Img
                         variant="top"
                         src="/images/placeholder/placeholder-4by3.svg"
@@ -423,7 +422,7 @@ const Cards = () => {
                       </Card.Body>
                     </Card>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={KitchenSinkCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -442,7 +441,7 @@ const Cards = () => {
           <div id="header-footer" className="mb-4">
             <h3>Header and Footer</h3>
             <p>
-              You may add a header by adding a <code>&lt;Card.Header&gt;</code>{" "}
+              You may add a header by adding a <code>&lt;Card.Header&gt;</code>{' '}
               component.
             </p>
           </div>
@@ -464,7 +463,7 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     <Card>
                       <Card.Header>Featured</Card.Header>
                       <Card.Body>
@@ -477,7 +476,7 @@ const Cards = () => {
                       </Card.Body>
                     </Card>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={HeaderFooterCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -505,7 +504,7 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     <Card className="text-center">
                       <Card.Header>Featured</Card.Header>
                       <Card.Body>
@@ -521,7 +520,7 @@ const Cards = () => {
                       </Card.Footer>
                     </Card>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={HeaderFooterCode2} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -562,9 +561,9 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
-                    <Card style={{ width: "18rem" }}>
+                    <Card style={{ width: '18rem' }}>
                       <Card.Body>
                         <Card.Title>Special title treatment</Card.Title>
                         <Card.Text>
@@ -575,7 +574,7 @@ const Cards = () => {
                       </Card.Body>
                     </Card>
 
-                    <Card style={{ width: "18rem" }} className="text-center">
+                    <Card style={{ width: '18rem' }} className="text-center">
                       <Card.Body>
                         <Card.Title>Special title treatment</Card.Title>
                         <Card.Text>
@@ -586,7 +585,7 @@ const Cards = () => {
                       </Card.Body>
                     </Card>
 
-                    <Card style={{ width: "18rem" }} className="text-end">
+                    <Card style={{ width: '18rem' }} className="text-end">
                       <Card.Body>
                         <Card.Title>Special title treatment</Card.Title>
                         <Card.Text>
@@ -598,7 +597,7 @@ const Cards = () => {
                     </Card>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={TextAlignmentCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -647,7 +646,7 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* Code started */}
                     <Card>
                       <Card.Img
@@ -690,7 +689,7 @@ const Cards = () => {
                     </Card>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={ImagesTopBottomCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -732,7 +731,7 @@ const Cards = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* Code start */}
                     <Card className="bg-dark text-white">
                       <Card.Img
@@ -751,7 +750,7 @@ const Cards = () => {
                     </Card>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={ImageOverlaysCode} />
                   </Tab.Pane>
                 </Tab.Content>

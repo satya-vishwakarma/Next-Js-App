@@ -12,7 +12,7 @@ import {
   ProfileHeader,
   ProjectsContributions,
   RecentFromBlog,
-} from 'sub-components';
+} from '@/sub-components';
 
 const Profile = () => {
   return (

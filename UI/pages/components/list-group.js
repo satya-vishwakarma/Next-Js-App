@@ -1,53 +1,52 @@
 // import node module libraries
-import { Fragment } from "react";
 import {
-  Col,
-  Row,
-  Card,
-  ListGroup,
   Badge,
-  Image,
-  Tab,
-  Nav,
+  Card,
+  Col,
   Container,
-} from "react-bootstrap";
-import { PlayCircle, Award, Calendar, Video, Clock } from "react-feather";
+  Image,
+  ListGroup,
+  Nav,
+  Row,
+  Tab,
+} from 'react-bootstrap';
+import { Award, Calendar, Clock, PlayCircle, Video } from 'react-feather';
 
 // import sub custom components
-import DotBadge from "components/bootstrap/DotBadge";
+import DotBadge from 'components/bootstrap/DotBadge';
 
 // import widget/custom components
-import { HighlightCode } from "widgets";
+import { HighlightCode } from 'widgets';
 
 // import react code data file
 import {
-  BasicListgroupCode,
   ActiveItemCode,
+  BasicListgroupCode,
+  ContextualClassesCode,
+  CustomContentCode,
   DisabledItemsCode,
-  LinksButtonsCode,
-  ListButtonCode,
   FlushListgroupCode,
+  GroupWithIconCode,
   HorizontalListgroupCode,
   HorizontalListgroupCode2,
-  ContextualClassesCode,
+  LinksButtonsCode,
+  ListButtonCode,
   WithBadgesCode,
-  CustomContentCode,
   WithIconCode,
-  GroupWithIconCode,
-} from "data/code/ListgroupsCode";
+} from '@/data/code/ListgroupsCode';
 
 const Listgroups = () => {
   function alertClicked() {
-    alert("You clicked a ListGroupItem");
+    alert('You clicked a ListGroupItem');
   }
 
   return (
     <Container fluid className="p-6">
       <Row>
         <Col lg={12} md={12} sm={12}>
-          <div className="border-bottom pb-4 mb-4 d-md-flex align-items-center justify-content-between">
-            <div className="mb-3 mb-md-0">
-              <h1 className="mb-1 h2 fw-bold">Listgroup</h1>
+          <div className="border-bottom d-md-flex align-items-center justify-content-between mb-4 pb-4">
+            <div className="mb-md-0 mb-3">
+              <h1 className="h2 fw-bold mb-1">Listgroup</h1>
               <p className="mb-0 ">
                 List groups are a flexible and powerful component for displaying
                 a series of content. Modify and extend them to support just
@@ -87,7 +86,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup>
                       <ListGroup.Item>Cras justo odio</ListGroup.Item>
@@ -98,7 +97,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={BasicListgroupCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -139,7 +138,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup>
                       <ListGroup.Item active>Cras justo odio</ListGroup.Item>
@@ -150,7 +149,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={ActiveItemCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -169,9 +168,9 @@ const Listgroups = () => {
           <div id="disabled-items" className="mb-4">
             <h3>Disabled Items</h3>
             <p>
-              Set the <code>disabled</code> prop to prevent actions on a{" "}
+              Set the <code>disabled</code> prop to prevent actions on a{' '}
               <code>&lt;ListGroup.Item&gt;</code>. For elements that aren&apos;t
-              naturally disable-able (like anchors) <code>onClick</code>{" "}
+              naturally disable-able (like anchors) <code>onClick</code>{' '}
               handlers are added that call <code>preventDefault</code> to mimick
               disabled behavior.
             </p>
@@ -194,7 +193,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup>
                       <ListGroup.Item disabled>Cras justo odio</ListGroup.Item>
@@ -205,7 +204,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={DisabledItemsCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -224,7 +223,7 @@ const Listgroups = () => {
           <div id="links-and-buttons" className="mb-4">
             <h3>Links and buttons</h3>
             <p>
-              Use <code>href</code> and <code>action</code> props to create{" "}
+              Use <code>href</code> and <code>action</code> props to create{' '}
               <em>actionable</em> list group items with hover, disabled, and
               active states.
             </p>
@@ -248,7 +247,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup defaultActiveKey="#link1">
                       <ListGroup.Item action href="#link1" active>
@@ -269,7 +268,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={LinksButtonsCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -288,7 +287,7 @@ const Listgroups = () => {
           <div className="mb-4">
             <p>
               With <code>onClick</code> function parameter, list group will
-              create <code>&lt;button&gt;</code>s, you can also make use of the{" "}
+              create <code>&lt;button&gt;</code>s, you can also make use of the{' '}
               <code>disabled</code> and <code>active</code> attributes.
             </p>
           </div>
@@ -310,7 +309,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup defaultActiveKey="#link1">
                       <ListGroup.Item action onClick={alertClicked} active>
@@ -331,7 +330,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={ListButtonCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -373,7 +372,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup variant="flush">
                       <ListGroup.Item>Cras justo odio</ListGroup.Item>
@@ -384,7 +383,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={FlushListgroupCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -404,7 +403,7 @@ const Listgroups = () => {
             <h3>Horizontal</h3>
             <p>
               Use the <code>horizontal</code> prop to make the ListGroup render
-              horizontally. Currently{" "}
+              horizontally. Currently{' '}
               <strong>
                 horizontal list groups cannot be combined with flush list
                 groups.
@@ -429,7 +428,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup horizontal>
                       <ListGroup.Item>Cras justo odio</ListGroup.Item>
@@ -438,7 +437,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={HorizontalListgroupCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -477,7 +476,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup horizontal>
                       <ListGroup.Item className="flex-fill">
@@ -492,7 +491,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={HorizontalListgroupCode2} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -511,7 +510,7 @@ const Listgroups = () => {
           <div id="contextual-classes" className="mb-4">
             <h3>Contextual classes</h3>
             <p>
-              Use contextual <code>variant</code>s on{" "}
+              Use contextual <code>variant</code>s on{' '}
               <code>&lt;ListGroup.Item&gt;</code>s to style them with a stateful
               background and color.
             </p>
@@ -534,7 +533,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup>
                       <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
@@ -565,7 +564,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={ContextualClassesCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -606,11 +605,11 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup>
                       <ListGroup.Item className="d-flex justify-content-between">
-                        Cras justo odio <Badge bg="primary">14</Badge>{" "}
+                        Cras justo odio <Badge bg="primary">14</Badge>{' '}
                       </ListGroup.Item>
                       <ListGroup.Item className="d-flex justify-content-between">
                         Dapibus ac facilisis in <Badge bg="primary">2</Badge>
@@ -621,7 +620,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={WithBadgesCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -662,7 +661,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup defaultActiveKey="#link1">
                       <ListGroup.Item action href="#link1" active>
@@ -701,7 +700,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={CustomContentCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -738,48 +737,48 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup variant="flush">
                       <ListGroup.Item>
                         <PlayCircle
                           size="15px"
-                          className="align-middle me-2 text-primary"
+                          className="text-primary me-2 align-middle"
                         />
                         12 hours video
                       </ListGroup.Item>
                       <ListGroup.Item>
                         <Award
                           size="15px"
-                          className="align-middle me-2 text-success"
+                          className="text-success me-2 align-middle"
                         />
                         Certificate
                       </ListGroup.Item>
                       <ListGroup.Item>
                         <Calendar
                           size="15px"
-                          className="align-middle me-2 text-info"
+                          className="text-info me-2 align-middle"
                         />
                         12 Article
                       </ListGroup.Item>
                       <ListGroup.Item>
                         <Video
                           size="15px"
-                          className="align-middle me-2 text-secondary"
+                          className="text-secondary me-2 align-middle"
                         />
                         Watch Offline
                       </ListGroup.Item>
                       <ListGroup.Item>
                         <Clock
                           size="15px"
-                          className="align-middle me-2 text-warning"
+                          className="text-warning me-2 align-middle"
                         />
                         Lifetime access
                       </ListGroup.Item>
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={WithIconCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -816,7 +815,7 @@ const Listgroups = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <ListGroup variant="flush">
                       <ListGroup.Item>
@@ -864,7 +863,7 @@ const Listgroups = () => {
                     </ListGroup>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={GroupWithIconCode} />
                   </Tab.Pane>
                 </Tab.Content>

@@ -1,32 +1,32 @@
 // import node module libraries
-import { Fragment, useState } from "react";
+import { useState } from 'react';
 import {
-  Col,
-  Row,
+  Button,
   Card,
+  Col,
+  Container,
+  Form,
+  Image,
+  Nav,
+  Row,
+  Tab,
   Toast,
   ToastContainer,
-  Button,
-  Image,
-  Tab,
-  Nav,
-  Form,
-  Container,
-} from "react-bootstrap";
+} from 'react-bootstrap';
 
 // import widget/custom components
-import { HighlightCode } from "widgets";
+import { HighlightCode } from 'widgets';
 
 // import react code data file
 import {
   BasicExampleCode,
-  TranslucentToastsCode,
-  StackingCode,
+  DismissibleCode,
   PlacementCode1,
   PlacementCode2,
   PlacementCode3,
-  DismissibleCode,
-} from "data/code/ToastsCode";
+  StackingCode,
+  TranslucentToastsCode,
+} from '@/data/code/ToastsCode';
 
 const Toasts = () => {
   const [showA, setShowA] = useState(true);
@@ -35,7 +35,7 @@ const Toasts = () => {
   const toggleShowA = () => setShowA(!showA);
   const toggleShowB = () => setShowB(!showB);
 
-  const [position, setPosition] = useState("top-start");
+  const [position, setPosition] = useState('top-start');
 
   const iconSVG = `<svg class="bd-placeholder-img rounded me-2" width="20" height="20"
 	xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"
@@ -46,9 +46,9 @@ const Toasts = () => {
     <Container fluid className="p-6">
       <Row>
         <Col lg={12} md={12} sm={12}>
-          <div className="border-bottom pb-4 mb-4 d-md-flex align-items-center justify-content-between">
-            <div className="mb-3 mb-md-0">
-              <h1 className="mb-1 h2 fw-bold">Toast</h1>
+          <div className="border-bottom d-md-flex align-items-center justify-content-between mb-4 pb-4">
+            <div className="mb-md-0 mb-3">
+              <h1 className="h2 fw-bold mb-1">Toast</h1>
               <p className="mb-0 ">
                 Push notifications to your visitors with a toast, a lightweight
                 and easily customizable alert message.
@@ -94,7 +94,7 @@ const Toasts = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <Toast>
                       <Toast.Header>
@@ -110,7 +110,7 @@ const Toasts = () => {
                     </Toast>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={BasicExampleCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -147,7 +147,7 @@ const Toasts = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4 bg-primary">
+                  <Tab.Pane eventKey="design" className="bg-primary p-4 pb-4">
                     {/* code started */}
                     <Toast className="mb-4">
                       <Toast.Header>
@@ -161,7 +161,7 @@ const Toasts = () => {
                     </Toast>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={TranslucentToastsCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -202,7 +202,7 @@ const Toasts = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <Toast className="mb-4">
                       <Toast.Header>
@@ -229,7 +229,7 @@ const Toasts = () => {
                     </Toast>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={StackingCode} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -270,7 +270,7 @@ const Toasts = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <div className="mb-3">
                       <label htmlFor="selectToastPlacement">
@@ -282,15 +282,15 @@ const Toasts = () => {
                         onChange={(e) => setPosition(e.currentTarget.value)}
                       >
                         {[
-                          "top-start",
-                          "top-center",
-                          "top-end",
-                          "middle-start",
-                          "middle-center",
-                          "middle-end",
-                          "bottom-start",
-                          "bottom-center",
-                          "bottom-end",
+                          'top-start',
+                          'top-center',
+                          'top-end',
+                          'middle-start',
+                          'middle-center',
+                          'middle-end',
+                          'bottom-start',
+                          'bottom-center',
+                          'bottom-end',
                         ].map((p) => (
                           <option key={p} value={p}>
                             {p}
@@ -302,14 +302,14 @@ const Toasts = () => {
                       aria-live="polite"
                       aria-atomic="true"
                       className="position-relative"
-                      style={{ minHeight: "240px" }}
+                      style={{ minHeight: '240px' }}
                     >
                       <ToastContainer className="p-3" position={position}>
                         <Toast>
                           <Toast.Header closeButton={false}>
                             <Image
                               src="/images/avatar/avatar-1.jpg"
-                              className="rounded me-2 avatar-xs"
+                              className="avatar-xs me-2 rounded"
                               alt="..."
                             />
                             <strong className="me-auto">Bootstrap</strong>
@@ -324,7 +324,7 @@ const Toasts = () => {
 
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={PlacementCode1} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -362,19 +362,19 @@ const Toasts = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <div
                       aria-live="polite"
                       aria-atomic="true"
                       style={{
-                        position: "relative",
-                        minHeight: "250px",
+                        position: 'relative',
+                        minHeight: '250px',
                       }}
                     >
                       <div
                         style={{
-                          position: "absolute",
+                          position: 'absolute',
                           top: 0,
                           right: 0,
                         }}
@@ -405,7 +405,7 @@ const Toasts = () => {
                     </div>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={PlacementCode2} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -443,15 +443,15 @@ const Toasts = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <div
                       aria-live="polite"
                       aria-atomic="true"
                       className="d-flex justify-content-center align-items-center"
                       style={{
-                        position: "relative",
-                        minHeight: "250px",
+                        position: 'relative',
+                        minHeight: '250px',
                       }}
                     >
                       <Toast>
@@ -469,7 +469,7 @@ const Toasts = () => {
                     </div>
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={PlacementCode3} />
                   </Tab.Pane>
                 </Tab.Content>
@@ -506,7 +506,7 @@ const Toasts = () => {
               </Card.Header>
               <Card.Body className="p-0">
                 <Tab.Content>
-                  <Tab.Pane eventKey="design" className="pb-4 p-4">
+                  <Tab.Pane eventKey="design" className="p-4 pb-4">
                     {/* code started */}
                     <Row>
                       <Col md={6} className="mb-2">
@@ -553,7 +553,7 @@ const Toasts = () => {
 
                     {/* end of code */}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="react" className="pb-4 p-4 react-code">
+                  <Tab.Pane eventKey="react" className="react-code p-4 pb-4">
                     <HighlightCode code={DismissibleCode} />
                   </Tab.Pane>
                 </Tab.Content>

@@ -12,6 +12,9 @@ import moment from 'moment';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 
 import axiosInstance from '@/lib/axios-instance';
+import { useRouter } from 'next/router';
+
+import { useEffect, useState } from 'react';
 import { DropFiles } from './../../widgets';
 
 interface InitialValues {
@@ -23,20 +26,44 @@ interface InitialValues {
   gender: string;
   dob: string;
   image: object;
+  email: string;
 }
 
-const initialValues: InitialValues = {
-  firstName: '',
-  lastName: '',
-  fatherName: '',
-  motherName: '',
-  class: '',
-  gender: '',
-  dob: '',
-  image: {},
-};
-
 const AddStudent = () => {
+  const {
+    query: { id },
+  } = useRouter();
+
+  const initialValues: InitialValues = {
+    firstName: '',
+    lastName: '',
+    fatherName: '',
+    motherName: '',
+    class: '',
+    gender: '',
+    dob: '',
+    email: '',
+    image: {},
+  };
+
+  const [initValue, setInitValue] = useState(initialValues);
+
+  const fetchStudentDetailsById = async (id: any) => {
+    if (id) {
+      const response: any = await axiosInstance.get('students/' + id);
+
+      console.log(response.data, 'response');
+
+      // return response.data;
+
+      setInitValue(response.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchStudentDetailsById(id);
+  }, []);
+
   const addStudent = async (formData: InitialValues) => {
     try {
       let data: any = new FormData();
@@ -78,8 +105,11 @@ const AddStudent = () => {
           {/* card body */}
           <Card.Body className="mt-5">
             <Toaster position="top-right" reverseOrder={false} />
+
+            {JSON.stringify(initValue)}
             <Formik
-              initialValues={initialValues}
+              initialValues={initValue}
+              enableReinitialize={true}
               validationSchema={AddStudentSchema}
               onSubmit={async (values: any, { setSubmitting, resetForm }) => {
                 try {
@@ -167,7 +197,7 @@ const AddStudent = () => {
                   </Row>
 
                   <Row className="mb-3">
-                    <Form.Label className="col-sm-4" htmlFor="fatherName">
+                    <Form.Label className="col-sm-4" htmlFor="motherName">
                       Mother Name
                     </Form.Label>
                     <Col md={8} xs={12}>
@@ -184,6 +214,24 @@ const AddStudent = () => {
                         name="motherName"
                         component="div"
                       ></ErrorMessage>
+                    </Col>
+                  </Row>
+
+                  <Row className="mb-3">
+                    <Form.Label className="col-sm-4" htmlFor="email">
+                      Email Id
+                    </Form.Label>
+                    <Col md={8} xs={12}>
+                      <Form.Control
+                        name="email"
+                        onChange={handleChange}
+                        value={values.email}
+                        type="text"
+                        placeholder="Enter your email id"
+                        id="motherName"
+                      />
+
+                      <ErrorMessage name="email" component="div"></ErrorMessage>
                     </Col>
                   </Row>
 

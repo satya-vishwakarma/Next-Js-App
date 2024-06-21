@@ -45,7 +45,7 @@ const SignIn = () => {
                 try {
                   const response = await signIn('credentials', {
                     redirect: false,
-                    username: 'test',
+                    username: 'uj8vt9qp',
                     password: 'Test@123',
                   });
 

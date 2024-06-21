@@ -5,7 +5,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { PageHeading } from '@/widgets';
 
 // import sub components
-import { BillingAddress, CurrentPlan } from 'sub-components';
+import { BillingAddress, CurrentPlan } from '@/sub-components';
 
 const Billing = () => {
   return (
