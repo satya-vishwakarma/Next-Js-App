@@ -1,9 +1,35 @@
 import { BaseModel } from '@app/common/model/baseModel.model';
 import { InjectModel } from '@nestjs/mongoose';
+
 import { Model } from 'mongoose';
 
 import { STATUS } from '@app/common/enums';
 import { Students } from '@app/schemas';
+
+import { FilterQuery } from 'mongoose';
+// Define interfaces for options
+interface WhereOptions {
+  // Define your specific filter fields here
+}
+
+interface ProjectionOptions {
+  [key: string]: any; // Include any specific projection fields
+}
+
+// Define default values for optional parameters
+const DEFAULT_LIMIT = 10;
+const DEFAULT_SKIP = 0;
+const DEFAULT_SORT_BY = 'asc';
+
+interface AggregationOptions {
+  pipeline: any[];
+  where?: FilterQuery<any>;
+  projection?: any;
+  limit?: number;
+  skip?: number;
+  orderBy?: string;
+  sortBy?: 'asc' | 'desc';
+}
 
 export class StudentModel extends BaseModel {
   constructor(
@@ -11,6 +37,39 @@ export class StudentModel extends BaseModel {
     private studentModel: Model<Students>,
   ) {
     super(studentModel);
+  }
+
+  async aggregateDocuments<T>(options: AggregationOptions): Promise<T[]> {
+    const {
+      pipeline,
+      where = {},
+      projection = {},
+      limit = DEFAULT_LIMIT,
+      skip = DEFAULT_SKIP,
+      orderBy,
+      sortBy = DEFAULT_SORT_BY,
+    } = options;
+
+    const filter: FilterQuery<T> = where;
+
+    let aggregationPipeline: any = [{ $match: filter }];
+
+    aggregationPipeline = aggregationPipeline.concat(pipeline);
+
+    if (Object.keys(projection).length > 0) {
+      aggregationPipeline.push({ $project: projection });
+    }
+
+    if (orderBy && sortBy) {
+      const sortStage = {};
+      sortStage[orderBy] = sortBy === 'asc' ? 1 : -1;
+      aggregationPipeline.push({ $sort: sortStage });
+    }
+
+    aggregationPipeline.push({ $skip: skip });
+    aggregationPipeline.push({ $limit: limit });
+
+    return await this.studentModel.aggregate(aggregationPipeline);
   }
 
   getStudentWithAgg() {
@@ -82,6 +141,22 @@ export class StudentModel extends BaseModel {
           createdAt: 1,
           updatedAt: 1,
           statusLabel: 1,
+        },
+      },
+    ]);
+  }
+
+  getStudentWithConditonAggre(where) {
+    return this.studentModel.aggregate([
+      {
+        $match: where,
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'userId',
+          foreignField: '_id',
+          as: 'users',
         },
       },
     ]);

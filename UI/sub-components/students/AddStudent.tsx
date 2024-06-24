@@ -115,7 +115,7 @@ const AddStudent = () => {
                 try {
                   await addStudent(values);
                   setSubmitting(false);
-                  resetForm();
+                  // resetForm();
                 } catch (error) {}
 
                 /*    setTimeout(() => {
