@@ -72,6 +72,10 @@ export abstract class BaseModel implements BaseModelInterface {
     return this.currentModel.findByIdAndUpdate(_id, data, { new: true });
   }
 
+  findAndUpdate(where: object, data: object) {
+    return this.currentModel.findByIdAndUpdate(where, data, { new: true });
+  }
+
   findByMatchWithAggre() {
     return this.currentModel.aggregate();
   }

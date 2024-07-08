@@ -1,35 +1,9 @@
-import { BaseModel } from '@app/common/model/baseModel.model';
-import { InjectModel } from '@nestjs/mongoose';
-
-import { Model } from 'mongoose';
-
+import { AggregationOptions } from '@app/common/dto/index.dto';
 import { STATUS } from '@app/common/enums';
+import { BaseModel } from '@app/common/model/baseModel.model';
 import { Students } from '@app/schemas';
-
-import { FilterQuery } from 'mongoose';
-// Define interfaces for options
-interface WhereOptions {
-  // Define your specific filter fields here
-}
-
-interface ProjectionOptions {
-  [key: string]: any; // Include any specific projection fields
-}
-
-// Define default values for optional parameters
-const DEFAULT_LIMIT = 10;
-const DEFAULT_SKIP = 0;
-const DEFAULT_SORT_BY = 'asc';
-
-interface AggregationOptions {
-  pipeline: any[];
-  where?: FilterQuery<any>;
-  projection?: any;
-  limit?: number;
-  skip?: number;
-  orderBy?: string;
-  sortBy?: 'asc' | 'desc';
-}
+import { InjectModel } from '@nestjs/mongoose';
+import { FilterQuery, Model } from 'mongoose';
 
 export class StudentModel extends BaseModel {
   constructor(
@@ -41,20 +15,49 @@ export class StudentModel extends BaseModel {
 
   async aggregateDocuments<T>(options: AggregationOptions): Promise<T[]> {
     const {
-      pipeline,
+      pipeline = [],
       where = {},
       projection = {},
-      limit = DEFAULT_LIMIT,
-      skip = DEFAULT_SKIP,
+      limit = 10,
+      skip = 0,
       orderBy,
-      sortBy = DEFAULT_SORT_BY,
+      sortBy = 'asc',
+      lookup = [],
+      addFields = {},
+      unwind = [],
     } = options;
 
     const filter: FilterQuery<T> = where;
-
-    let aggregationPipeline: any = [{ $match: filter }];
+    let aggregationPipeline: any[] = [{ $match: filter }];
 
     aggregationPipeline = aggregationPipeline.concat(pipeline);
+
+    for (const lookupStage of lookup) {
+      aggregationPipeline.push({
+        $lookup: {
+          from: lookupStage.from,
+          localField: lookupStage.localField,
+          foreignField: lookupStage.foreignField,
+          as: lookupStage.as,
+        },
+      });
+    }
+
+    for (const unwindStage of unwind) {
+      const unwindParams: any = { path: unwindStage.path };
+      if (unwindStage.includeArrayIndex) {
+        unwindParams.includeArrayIndex = unwindStage.includeArrayIndex;
+      }
+      if (unwindStage.preserveNullAndEmptyArrays !== undefined) {
+        unwindParams.preserveNullAndEmptyArrays =
+          unwindStage.preserveNullAndEmptyArrays;
+      }
+      aggregationPipeline.push({ $unwind: unwindParams });
+    }
+
+    if (Object.keys(addFields).length > 0) {
+      aggregationPipeline.push({ $addFields: addFields });
+    }
 
     if (Object.keys(projection).length > 0) {
       aggregationPipeline.push({ $project: projection });
@@ -93,7 +96,6 @@ export class StudentModel extends BaseModel {
           ],
         },
       },
-
       {
         $unwind: {
           path: '$users',
@@ -113,10 +115,9 @@ export class StudentModel extends BaseModel {
                   case: { $eq: ['$status', STATUS.ACTIVE] },
                   then: 'Active',
                 },
-
                 {
                   case: { $eq: ['$status', STATUS.INACTIVE] },
-                  then: 'InActive',
+                  then: 'Inactive',
                 },
               ],
               default: '',
@@ -124,7 +125,6 @@ export class StudentModel extends BaseModel {
           },
         },
       },
-
       {
         $project: {
           profileImage: '$users.profileImage.profile',
@@ -160,5 +160,9 @@ export class StudentModel extends BaseModel {
         },
       },
     ]);
+  }
+
+  updateStudentById(id: string, data: object) {
+    return this.studentModel.findByIdAndUpdate(id, data);
   }
 }

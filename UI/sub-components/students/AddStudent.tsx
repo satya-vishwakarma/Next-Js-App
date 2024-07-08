@@ -46,23 +46,26 @@ const AddStudent = () => {
     image: {},
   };
 
+  // console.log(id, 'id');
+
   const [initValue, setInitValue] = useState(initialValues);
 
   const fetchStudentDetailsById = async (id: any) => {
     if (id) {
       const response: any = await axiosInstance.get('students/' + id);
 
-      console.log(response.data, 'response');
-
-      // return response.data;
+      console.log(response.data, 'response.data');
 
       setInitValue(response.data);
+    } else {
+      setInitValue(initialValues);
     }
   };
 
   useEffect(() => {
+    console.log(id, '_id');
     fetchStudentDetailsById(id);
-  }, []);
+  }, [id]);
 
   const addStudent = async (formData: InitialValues) => {
     try {
@@ -70,10 +73,13 @@ const AddStudent = () => {
       for (const [key, value] of Object.entries(formData)) {
         data.append(key, value);
       }
-
       const response = await axiosInstance.post('students', data);
 
-      toast.success('Student save successfully.');
+      const message = data.get('_id')
+        ? ' Student update successfully.'
+        : 'Student save successfully.';
+
+      toast.success(message);
       return response;
     } catch (error) {
       toast.error('Error');
@@ -106,7 +112,6 @@ const AddStudent = () => {
           <Card.Body className="mt-5">
             <Toaster position="top-right" reverseOrder={false} />
 
-            {JSON.stringify(initValue)}
             <Formik
               initialValues={initValue}
               enableReinitialize={true}
@@ -115,16 +120,10 @@ const AddStudent = () => {
                 try {
                   await addStudent(values);
                   setSubmitting(false);
-                  // resetForm();
-                } catch (error) {}
-
-                /*    setTimeout(() => {
-                  addStudent();
-                  // dispatch(addStudentRed(values));
-                  toast.success('Student save successfully.');
-                  setSubmitting(false);
                   resetForm();
-                }, 400); */
+                } catch (error) {
+                  toast.error('Error');
+                }
               }}
             >
               {({
@@ -142,7 +141,7 @@ const AddStudent = () => {
 
                   <Row className="mb-3">
                     <Form.Label className="col-sm-4" htmlFor="newEmailAddress">
-                      First Name
+                      First Name -
                     </Form.Label>
                     <Col md={8} xs={12}>
                       <Form.Control
@@ -296,14 +295,18 @@ const AddStudent = () => {
 
                   <Row className="mb-3">
                     <Form.Label className="col-sm-4" htmlFor="DOB">
-                      DOB
+                      DOB - {values.dob}
                     </Form.Label>
                     <Col md={8} xs={12}>
                       <DateRangePicker
                         initialSettings={{
                           singleDatePicker: true,
                           showDropdowns: true,
-                          startDate: moment(),
+                          locale: {
+                            format: 'MM/DD/YYYY',
+                            // other locale settings...
+                          },
+                          //   startDate: moment(values.dob).format('DD-MM-YYYY'),
                         }}
                         onCallback={(start) => {
                           setFieldValue(
@@ -333,11 +336,20 @@ const AddStudent = () => {
                     <Col md={8} xs={12}>
                       <div className="dropzone mb-3 border-dashed py-10">
                         <DropFiles
+                          imageData={values.image}
                           onCallback={(data: any) => {
+                            console.log(data, 'sfsdfsd');
                             setFieldValue('image', data[0]);
                           }}
                         />
                       </div>
+
+                      {/*  <img
+                        className="rounded-circle avatar-md"
+                        src={values.profileImage.profile}
+                        height="30"
+                        width="30"
+                      /> */}
                     </Col>
 
                     <Col md={{ offset: 4, span: 8 }} xs={12} className="mt-4">

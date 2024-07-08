@@ -6,9 +6,13 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { StudentDto } from './dto/student.dto';
 import { StudentModel } from './model/student.model';
 
+import { first } from 'lodash';
+
 import * as fs from 'fs';
 
 import { DATAIMAGEPREFIX } from '@app/common/constants/constants';
+import { AggregationOptions } from '@app/common/dto/index.dto';
+import { mongodbDateFormat } from '@app/common/helpers';
 import { Types } from 'mongoose';
 import { join } from 'path';
 
@@ -59,17 +63,35 @@ export class StudentsService {
       email: body.email,
     };
 
-    const userInfo = await this.usersService.registerUser(prePareRegData);
+    console.log(body);
 
-    console.log(userInfo[0]._id, 'userInfo');
-    return this.studentModel.save({
-      ...body,
-      ...{
-        userId: userInfo[0]._id,
-        createdBy: userId,
-        updatedBy: userId,
-      },
-    });
+    if (body._id) {
+      const { userId: studentUserId } =
+        await this.studentModel.updateStudentById(body._id, {
+          ...body,
+          updatedAt: prePareRegData.updatedAt,
+          updatedBy: userId,
+        });
+
+      return await this.usersService.findAndUpdate(
+        { _id: studentUserId },
+        {
+          profileImage: prePareRegData.profileImage,
+          updatedAt: prePareRegData.updatedAt,
+          updatedBy: userId,
+        },
+      );
+    } else {
+      const userInfo = await this.usersService.registerUser(prePareRegData);
+      return this.studentModel.save({
+        ...body,
+        ...{
+          userId: userInfo[0]._id,
+          createdBy: userId,
+          updatedBy: userId,
+        },
+      });
+    }
   }
 
   async getAllStudent() {
@@ -108,8 +130,47 @@ export class StudentsService {
 
   async getStudentInfo(id) {
     try {
-      return await this.studentModel.findById(id);
+      const options: AggregationOptions = {
+        where: { _id: new Types.ObjectId(id) },
+        lookup: [
+          {
+            from: 'users',
+            localField: 'userId',
+            foreignField: '_id',
+            as: 'users',
+          },
+        ],
+        unwind: [
+          {
+            path: '$users',
+            preserveNullAndEmptyArrays: true,
+          },
+        ],
+
+        addFields: {
+          email: '$users.email',
+          image: '$users.profileImage',
+          dob: mongodbDateFormat('$dob'),
+        },
+
+        projection: {
+          _id: 1,
+          firstName: 1,
+          lastName: 1,
+          fatherName: 1,
+          motherName: 1,
+          class: 1,
+          status: 1,
+          dob: 1,
+          gender: 1,
+          email: 1,
+          image: 1,
+        },
+      };
+
+      return first(await this.studentModel.aggregateDocuments(options));
     } catch (error) {
+      console.log(error);
       throw new BadRequestException();
     }
   }

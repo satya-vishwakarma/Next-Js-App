@@ -49,4 +49,8 @@ export class UsersService {
       });
     });
   }
+
+  findAndUpdate(where, data) {
+    return this.userModel.findAndUpdate(where, data);
+  }
 }

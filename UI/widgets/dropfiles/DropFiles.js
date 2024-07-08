@@ -41,18 +41,46 @@ export const DropFiles = (props) => {
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
       setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
+        acceptedFiles.map((file) => {
+          console.log(file);
+          return Object.assign(file, {
             preview: URL.createObjectURL(file),
-          }),
-        ),
+          });
+        }),
       );
 
       props.onCallback(acceptedFiles);
     },
   });
 
-  console.log(acceptedFiles, 'ppppppppppppppppp');
+  useEffect(() => {
+    if (Object.keys(props.imageData).length) {
+      const base64Image = props.imageData.profile;
+      const byteCharacters = atob(base64Image.split(',')[1]);
+      const byteArrays = [];
+      for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+        const slice = byteCharacters.slice(offset, offset + 512);
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+      const blob = new Blob(byteArrays, { type: 'image/png' });
+
+      // Create a URL for the Blob
+      const url = URL.createObjectURL(blob);
+      setFiles([
+        Object.assign(props.imageData, {
+          preview: url,
+        }),
+      ]);
+
+      const file = new File([blob], 'image.png', { type: 'image/png' });
+      props.onCallback([file]);
+    }
+  }, [props.imageData]);
 
   const iconStyle = {
     cursor: 'pointer',

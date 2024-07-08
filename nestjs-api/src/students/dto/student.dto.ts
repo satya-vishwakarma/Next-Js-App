@@ -1,9 +1,12 @@
 import { GENDER } from '@app/common/enums';
-import { IsIn, IsNotEmpty } from 'class-validator';
+import { IsIn, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class StudentDto {
   @IsNotEmpty()
   firstName: string;
+
+  @IsOptional()
+  _id: string;
 
   @IsNotEmpty()
   lastName: string;
