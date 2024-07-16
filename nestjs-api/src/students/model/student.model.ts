@@ -75,11 +75,20 @@ export class StudentModel extends BaseModel {
     return await this.studentModel.aggregate(aggregationPipeline);
   }
 
-  getStudentWithAgg() {
-    return this.studentModel.aggregate([
-      {
-        $match: { status: { $ne: 0 } },
-      },
+  async getStudentWithAgg({
+    page,
+    limit,
+    sortBy,
+    sortOrder,
+    queryFilter,
+  }: any) {
+    const pipeline = [];
+
+    if (typeof queryFilter !== 'undefined') {
+      pipeline.push({ $match: queryFilter });
+    }
+
+    const lookUp = [
       {
         $lookup: {
           from: 'users',
@@ -107,14 +116,8 @@ export class StudentModel extends BaseModel {
           statusLabel: {
             $switch: {
               branches: [
-                {
-                  case: { $eq: ['$status', STATUS.DELETE] },
-                  then: 'Deleted',
-                },
-                {
-                  case: { $eq: ['$status', STATUS.ACTIVE] },
-                  then: 'Active',
-                },
+                { case: { $eq: ['$status', STATUS.DELETE] }, then: 'Deleted' },
+                { case: { $eq: ['$status', STATUS.ACTIVE] }, then: 'Active' },
                 {
                   case: { $eq: ['$status', STATUS.INACTIVE] },
                   then: 'Inactive',
@@ -143,7 +146,32 @@ export class StudentModel extends BaseModel {
           statusLabel: 1,
         },
       },
-    ]);
+    ];
+
+    // Spread the elements of lookUp array into pipeline
+    pipeline.push(...lookUp);
+
+    // Pagination
+    if (page !== undefined && limit !== undefined) {
+      const skipStage = {
+        $skip: (page - 1) * +limit,
+      };
+      const limitStage = {
+        $limit: +limit,
+      };
+      pipeline.push(skipStage, limitStage);
+    }
+
+    if (sortBy && sortOrder) {
+      const sortStage = {
+        $sort: {
+          [sortBy]: sortOrder === 'asc' ? 1 : -1,
+        },
+      };
+      pipeline.push(sortStage);
+    }
+
+    return await this.studentModel.aggregate(pipeline).exec();
   }
 
   getStudentWithConditonAggre(where) {

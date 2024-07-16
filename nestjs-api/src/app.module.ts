@@ -39,10 +39,6 @@ import { excludeRoutes } from './routes/excludeRoutes';
   providers: [AppService, AuthService],
 })
 export class AppModule {
-
-
-
-  
   configure(consumer: MiddlewareConsumer) {
     excludeRoutes(consumer);
   }

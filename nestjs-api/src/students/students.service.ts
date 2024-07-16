@@ -94,8 +94,41 @@ export class StudentsService {
     }
   }
 
-  async getAllStudent() {
-    return await this.studentModel.getStudentWithAgg();
+  async getAllStudent({
+    page = 1,
+    limit = 5,
+    sortBy = 'id',
+    sortOrder = 'asc',
+    searchText = '',
+  }) {
+    let queryFilter: any = { status: { $ne: 0 } };
+
+    if (searchText !== '') {
+      queryFilter = {
+        ...queryFilter,
+        $or: [
+          { firstName: { $regex: searchText, $options: 'i' } },
+          { lastName: { $regex: searchText, $options: 'i' } },
+          { email: { $regex: searchText, $options: 'i' } },
+        ],
+      };
+    }
+
+    const totalRows = this.studentModel.getStudentWithAgg({ queryFilter });
+    const studentData = this.studentModel.getStudentWithAgg({
+      page,
+      limit,
+      sortBy,
+      sortOrder,
+      queryFilter,
+    });
+
+    const [totalRow, data] = await Promise.all([totalRows, studentData]);
+
+    return {
+      data,
+      totalRow: totalRow.length,
+    };
   }
 
   async deleteStudent(id, request) {

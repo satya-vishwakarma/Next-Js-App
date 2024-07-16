@@ -54,7 +54,11 @@ export const DropFiles = (props) => {
   });
 
   useEffect(() => {
-    if (Object.keys(props.imageData).length) {
+    if (
+      typeof props.imageData !== 'undefined' &&
+      Object.keys(props.imageData).length &&
+      typeof props.imageData.profile !== 'undefined'
+    ) {
       const base64Image = props.imageData.profile;
       const byteCharacters = atob(base64Image.split(',')[1]);
       const byteArrays = [];

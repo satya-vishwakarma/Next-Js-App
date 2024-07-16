@@ -15,10 +15,6 @@ export interface objectIdDto {
   _id: Schema.Types.ObjectId;
 }
 
-
-
-
-
 interface LookupStage {
   from: string;
   localField: string;
@@ -45,7 +41,6 @@ export interface AggregationOptions {
   orderBy?: string;
   sortBy?: 'asc' | 'desc';
   lookup?: LookupStage[];
-  addFields?: AddFieldsStage,
-  unwind?: UnwindStage[],
+  addFields?: AddFieldsStage;
+  unwind?: UnwindStage[];
 }
-

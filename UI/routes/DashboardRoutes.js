@@ -48,6 +48,37 @@ export const DashboardMenu = [
 
   {
     id: uuid(),
+    title: 'Masters',
+    icon: 'corner-left-down',
+    children: [
+      {
+        id: uuid(),
+        link: '#',
+        title: 'Class',
+        children: [{ id: uuid(), link: '/pages/listClass', name: 'Classes' }],
+      },
+      {
+        id: uuid(),
+        link: '#',
+        title: 'ABc',
+        children: [
+          {
+            id: uuid(),
+            link: '#',
+            title: 'NavItem 1',
+            children: [
+              { id: uuid(), link: '#', name: 'NavChildItem 1' },
+              { id: uuid(), link: '#', name: 'NavChildItem 2' },
+            ],
+          },
+          { id: uuid(), link: '#', name: 'NavItem 2' },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: uuid(),
     title: 'Pages',
     icon: 'layers',
     children: [

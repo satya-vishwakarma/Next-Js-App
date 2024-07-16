@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Req,
   UploadedFile,
   UseInterceptors,
@@ -47,8 +48,17 @@ export class StudentsController {
   }
 
   @Get()
-  getAllStudent() {
-    return this.studentService.getAllStudent();
+  getAllStudent(
+    @Query()
+    query: {
+      page?: number;
+      limit?: number;
+      sortBy?: string;
+      sortOrder?: 'asc' | 'desc';
+      searchText?: string;
+    },
+  ) {
+    return this.studentService.getAllStudent(query);
   }
 
   @Get(':id')

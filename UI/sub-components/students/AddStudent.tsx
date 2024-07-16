@@ -32,6 +32,7 @@ interface InitialValues {
 const AddStudent = () => {
   const {
     query: { id },
+    ...router
   } = useRouter();
 
   const initialValues: InitialValues = {
@@ -54,8 +55,6 @@ const AddStudent = () => {
     if (id) {
       const response: any = await axiosInstance.get('students/' + id);
 
-      console.log(response.data, 'response.data');
-
       setInitValue(response.data);
     } else {
       setInitValue(initialValues);
@@ -63,7 +62,6 @@ const AddStudent = () => {
   };
 
   useEffect(() => {
-    console.log(id, '_id');
     fetchStudentDetailsById(id);
   }, [id]);
 
@@ -121,6 +119,7 @@ const AddStudent = () => {
                   await addStudent(values);
                   setSubmitting(false);
                   resetForm();
+                  router.push('/pages/listStudent');
                 } catch (error) {
                   toast.error('Error');
                 }
@@ -338,7 +337,6 @@ const AddStudent = () => {
                         <DropFiles
                           imageData={values.image}
                           onCallback={(data: any) => {
-                            console.log(data, 'sfsdfsd');
                             setFieldValue('image', data[0]);
                           }}
                         />

@@ -21,6 +21,7 @@ import BillingAddress from '@/sub-components/billing/BillingAddress';
 import CurrentPlan from '@/sub-components/billing/CurrentPlan';
 
 // sub components for /pages/settings
+import ListClasses from '@/sub-components/class/ListClass';
 import DeleteAccount from '@/sub-components/settings/DeleteAccount';
 import EmailSetting from '@/sub-components/settings/EmailSetting';
 import GeneralSetting from '@/sub-components/settings/GeneralSetting';
@@ -39,6 +40,7 @@ export {
   DeleteAccount,
   EmailSetting,
   GeneralSetting,
+  ListClasses,
   ListStudent,
   MyTeam,
   Notifications,

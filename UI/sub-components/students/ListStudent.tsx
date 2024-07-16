@@ -1,22 +1,80 @@
 import axiosInstance from '@/lib/axios-instance';
 import ConfirmBox from '@/pages/components/common/confirmModalBox';
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 
+import PaginationComponent from '@/pages/components/common/Pagination';
+
+import Container from 'react-bootstrap/Container';
+
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { Form } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+
+interface DialogOptions {
+  cancelText?: string;
+  okText?: string;
+  title?: string;
+  body?: string;
+  actionType?: string;
+}
+
+type CallbackFunction<T> = (...args: T[]) => void;
+
+const LoadingSpinner = dynamic(() => import('@/components/comman/loader'), {
+  ssr: false,
+});
+
+function useDebounce<T>(
+  callback: CallbackFunction<T>,
+  delay: number,
+): CallbackFunction<T> {
+  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+    };
+  }, [timerId]);
+
+  const debounceFunction: CallbackFunction<T> = (...args: T[]) => {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    const newTimerId = setTimeout(() => {
+      callback(...args);
+    }, delay);
+    setTimerId(newTimerId);
+  };
+
+  return debounceFunction;
+}
 
 const StudentList = () => {
-  const [listStudent, setStudentList] = useState([]);
+  const [listStudent, setStudentList] = useState<any>([]);
+
   const [selectedId, setSelectedId] = useState('');
   const [modalShow, setModalShow] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [modelProps, setModelProps] = useState<DialogOptions>({});
 
-  const [modelProps, setModelProps] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  const getStudentList = async () => {
+  const limit = 5;
+
+  const getStudentList = async (value: any = '') => {
     try {
-      const response = await axiosInstance.get('students');
+      setLoading(true);
+
+      const response = await axiosInstance.get(
+        `students?limit=${limit}&page=${currentPage}&searchText=${value}`,
+      );
       setStudentList(response.data);
+      setLoading(false);
     } catch (error: any) {
       toast.error(error?.message);
     }
@@ -24,7 +82,7 @@ const StudentList = () => {
 
   useEffect(() => {
     getStudentList();
-  }, []);
+  }, [currentPage]);
 
   const deleteStudent = (id: string) => {
     setSelectedId(id);
@@ -32,7 +90,7 @@ const StudentList = () => {
   };
 
   const activeAndInActiveHandle = (e: any, id: string) => {
-    const { title } = e.target; // Active
+    const { title } = e.target;
 
     setModelProps({
       body: `Are you sure you want to be ${title}?`,
@@ -42,12 +100,11 @@ const StudentList = () => {
     setModalShow(true);
   };
 
-  const iconCursor = { cursor: 'pointer' };
+  const iconCursor = { cursor: 'pointer', marginLeft: '10px' };
 
   const onConfirm = async (actionType: string) => {
-    /// selectedId;
-    console.log(actionType, 'onConfirm');
     try {
+      setLoading(true);
       let response: any = '';
       switch (actionType.toLowerCase()) {
         case 'active':
@@ -68,13 +125,22 @@ const StudentList = () => {
       toast.success(response.data);
       setModalShow(false);
       getStudentList();
+      setLoading(false);
     } catch (error: any) {
       toast.error(error?.message);
     }
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   const hideModal = () => {
     setSelectedId('');
+
+    delete modelProps.body;
+    delete modelProps.actionType;
+
     setModalShow(false);
   };
 
@@ -87,89 +153,135 @@ const StudentList = () => {
     });
   };
 
+  const divStyle = {
+    marginLeft: '10px',
+  };
+
+  const tableCellStyle: CSSProperties = {
+    textAlign: 'right',
+  };
+
+  const debouncedSearch = useDebounce(getStudentList, 1000);
+
+  const handleSearchBox = (event: any) => {
+    const { value }: any = event.target;
+
+    debouncedSearch(value);
+  };
+
   return (
     <>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Container fluid>
+        <div className="d-flex justify-content-between w-100">
+          <div className="ms-lg-3 d-none d-md-none d-lg-block">
+            {/* Search Form */}
+            <Form className="d-flex align-items-center">
+              <Form.Control
+                type="search"
+                onChange={handleSearchBox}
+                placeholder="Search"
+              />
+            </Form>
+          </div>
+        </div>
+        <Toaster position="top-right" reverseOrder={false} />
 
-      <Table responsive className="text-nowrap">
-        <thead>
-          <tr>
-            <th scope="col">Profile</th>
-            <th scope="col">FirstName</th>
-            <th scope="col">LastName</th>
-            <th scope="col">FatherName</th>
-            <th scope="col">MotherName</th>
-            <th scope="col">Class</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listStudent.map((student: any, index) => (
-            <tr key={index}>
-              <th scope="row">
-                <img
-                  className="rounded-circle avatar-md"
-                  alt={student?.firstName}
-                  src={student.profileImage}
-                  height="30"
-                  width="30"
-                />
-              </th>
-              <td>{student?.firstName}</td>
-              <td>{student?.lastName}</td>
-              <td>{student?.fatherName}</td>
-              <td>{student?.motherName}</td>
-              <td>{student?.class}</td>
-              <td>{student?.statusLabel}</td>
-              <td>
-                <i
-                  className="fa fa-eye fs-3 icon"
-                  title="View"
-                  style={iconCursor}
-                ></i>{' '}
-                &nbsp;&nbsp;
-                <i
-                  className="fa-regular fa-pen-to-square fs-3 pl3-l icon"
-                  title="Edit"
-                  style={iconCursor}
-                  onClick={(i) => handleEditEvent(student._id)}
-                ></i>
-                &nbsp;&nbsp;
-                {student?.status === 1 ? (
-                  <i
-                    className="fa-regular fa-eye-slash fs-3 icon mr-2"
-                    title="Inactive"
-                    onClick={(i) => activeAndInActiveHandle(i, student._id)}
-                    style={iconCursor}
-                  ></i>
-                ) : (
-                  <i
-                    className="fa-regular fa-eye fs-3 pl3-l icon"
-                    title="Active"
-                    onClick={(i) => activeAndInActiveHandle(i, student._id)}
-                    style={iconCursor}
-                  ></i>
-                )}
-                &nbsp;&nbsp;
-                <i
-                  className="fa fa-trash fs-3 icon"
-                  onClick={() => deleteStudent(student._id)}
-                  title="Delete"
-                  style={iconCursor}
-                ></i>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+        <Row>
+          <Table responsive>
+            <thead>
+              <tr>
+                <th scope="col">Profile</th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">FatherName</th>
+                <th scope="col">MotherName</th>
+                <th scope="col">Class</th>
+                <th scope="col">Status</th>
+                <th scope="col" style={tableCellStyle} align="right">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {listStudent.data ? (
+                listStudent?.data.map((student: any, index: number) => (
+                  <tr key={index}>
+                    <th scope="row">
+                      <img
+                        className="rounded-circle avatar-md"
+                        alt={student?.firstName}
+                        src={student.profileImage}
+                        height="30"
+                        width="30"
+                      />
+                    </th>
+                    <td>{student?.firstName}</td>
+                    <td>{student?.lastName}</td>
+                    <td>{student?.fatherName}</td>
+                    <td>{student?.motherName}</td>
+                    <td>{student?.class}</td>
+                    <td>{student?.statusLabel}</td>
+                    <td align="right">
+                      <i
+                        className="fa fa-eye fs-3 icon"
+                        title="View"
+                        style={iconCursor}
+                      ></i>{' '}
+                      <i
+                        className="fa-regular fa-pen-to-square fs-3 pl3-l icon"
+                        title="Edit"
+                        style={iconCursor}
+                        onClick={(i) => handleEditEvent(student._id)}
+                      ></i>
+                      {student?.status === 1 ? (
+                        <i
+                          className="fa-regular fa-eye-slash fs-3 icon mr-2"
+                          title="Inactive"
+                          onClick={(i) =>
+                            activeAndInActiveHandle(i, student._id)
+                          }
+                          style={iconCursor}
+                        ></i>
+                      ) : (
+                        <i
+                          className="fa-regular fa-eye fs-3 pl3-l icon"
+                          title="Active"
+                          onClick={(i) =>
+                            activeAndInActiveHandle(i, student._id)
+                          }
+                          style={iconCursor}
+                        ></i>
+                      )}
+                      <i
+                        className="fa fa-trash fs-3 icon mb-3 pt-2"
+                        onClick={() => deleteStudent(student._id)}
+                        title="Delete"
+                        style={iconCursor}
+                      ></i>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <LoadingSpinner />
+              )}
+            </tbody>
+          </Table>
 
-      <ConfirmBox
-        {...modelProps}
-        show={modalShow}
-        onHide={hideModal}
-        onConfirm={onConfirm}
-      />
+          <PaginationComponent
+            totalRecords={listStudent?.totalRow}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+            recordsPerPage={limit}
+          />
+        </Row>
+
+        <ConfirmBox
+          {...modelProps}
+          show={modalShow}
+          onHide={hideModal}
+          onConfirm={onConfirm}
+        />
+      </Container>
     </>
   );
 };
