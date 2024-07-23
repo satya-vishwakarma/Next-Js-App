@@ -1,7 +1,18 @@
 import { ROLES, STATUS } from '@app/common/enums';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as mongooseSchema } from 'mongoose';
-export type UsersDocument = Users & Document;
+
+export interface UsersDocuments extends Document {
+  email: string;
+  username: string;
+  password: string;
+  role: string;
+  profileImage: object;
+  status: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 @Schema({ collection: 'users' })
 export class Users {
   @Prop({ required: true, unique: true })

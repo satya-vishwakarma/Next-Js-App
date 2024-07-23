@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
 import { ModulesModule } from './modules/modules.module';
 import { excludeRoutes } from './routes/excludeRoutes';
+import { TeachersModule } from './teachers/teachers.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { excludeRoutes } from './routes/excludeRoutes';
     StudentsModule,
     AuthModule,
     ModulesModule,
+    TeachersModule,
   ],
   controllers: [AppController],
   providers: [AppService, AuthService],

@@ -64,8 +64,8 @@ export abstract class BaseModel implements BaseModelInterface {
     return response.save();
   }
 
-  findOne(condition: object) {
-    return this.currentModel.findOne(condition);
+  findOne(condition: object, projection: object = {}) {
+    return this.currentModel.findOne(condition, projection);
   }
 
   findByIdAndUpdate(_id, data) {

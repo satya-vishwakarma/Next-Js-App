@@ -63,8 +63,6 @@ export class StudentsService {
       email: body.email,
     };
 
-    console.log(body);
-
     if (body._id) {
       const { userId: studentUserId } =
         await this.studentModel.updateStudentById(body._id, {

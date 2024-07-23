@@ -1,6 +1,7 @@
 import { UserModel } from '@app/users/model/users.model';
 import { Injectable } from '@nestjs/common';
 
+import { UsersDocuments } from '@app/schemas';
 import * as bcrypt from 'bcrypt';
 import { UserDto } from './dto/users.dto';
 
@@ -17,7 +18,7 @@ export class UsersService {
     password,
     email,
     profileImage,
-  }: UserDto): Promise<object> {
+  }: UserDto): Promise<UsersDocuments> {
     const hash = await bcrypt.hash(password, await bcrypt.genSalt());
     const prepareUserObj = {
       username,
@@ -26,7 +27,7 @@ export class UsersService {
       profileImage,
     };
     await this.userModel.save(prepareUserObj);
-    return this.userModel.find(
+    return this.userModel.findOne(
       { email: email },
       {
         password: 0,

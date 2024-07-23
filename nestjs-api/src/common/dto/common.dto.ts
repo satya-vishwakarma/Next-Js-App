@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { Schema } from 'mongoose';
 
 import { FilterQuery } from 'mongoose';
@@ -43,4 +44,12 @@ export interface AggregationOptions {
   lookup?: LookupStage[];
   addFields?: AddFieldsStage;
   unwind?: UnwindStage[];
+}
+
+export interface UserData {
+  userId: ObjectId;
+  username: string;
+  roles: string;
+  iat: number;
+  exp: number;
 }
